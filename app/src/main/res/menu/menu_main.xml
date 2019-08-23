@@ -5,11 +5,11 @@
         <item
             android:id="@+id/nav_postv"
             android:icon="@drawable/ic_cars"
-            android:title="Posted Vehicles" />
+            android:title="Vehicles" />
         <item
             android:id="@+id/nav_postr"
             android:icon="@drawable/ic_estates"
-            android:title="Posted Estates" />
+            android:title="Estates" />
         <item
             android:id="@+id/nav_add"
             android:icon="@drawable/ic_add"

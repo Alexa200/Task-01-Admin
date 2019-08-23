@@ -40,7 +40,7 @@ public class Casa extends AppCompatActivity implements NavigationView.OnNavigati
 
         mToobar= (Toolbar) findViewById(R.id.mainpgbar);
         setSupportActionBar(mToobar);
-        getSupportActionBar().setTitle("Posts");
+        //getSupportActionBar().setTitle("Posts");
 
         myDialog = new Dialog(this);
 
@@ -80,7 +80,8 @@ public class Casa extends AppCompatActivity implements NavigationView.OnNavigati
             frman0.beginTransaction().replace(R.id.maincontaina,fragu).commit();
         }else {
             Fragment frags=null;
-            frags=new Frag_PostV();
+            getSupportActionBar().setTitle("Dashboard");
+            frags=new Frag_Home();
             FragmentManager frman0=getSupportFragmentManager();
             frman0.beginTransaction().replace(R.id.maincontaina,frags).commit();
         }
