@@ -9,14 +9,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Casa"
-            android:theme="@style/AppTheme2">
+        <activity android:name=".Login"
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!--<activity android:name=".Casa"
+            android:theme="@style/AppTheme2">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>-->
+        <activity android:name=".NewDetails"/>
+        <activity android:name=".PhoneReq"/>
+        <activity android:name=".PhoneTest"/>
+        <activity android:name=".Act_myProfile"/>
+        <activity android:name=".Casa"
+            android:theme="@style/AppTheme2"/>
     </application>
 
 </manifest>

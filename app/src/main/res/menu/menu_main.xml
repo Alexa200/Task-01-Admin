@@ -15,7 +15,7 @@
             android:icon="@drawable/ic_add"
             android:title="Add" />
         <item
-            android:id="@+id/nav_addv"
+            android:id="@+id/nav_prof"
             android:icon="@drawable/ic_profile"
             android:title="My Profile" />
         <!--<item

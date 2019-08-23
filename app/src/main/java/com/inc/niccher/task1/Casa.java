@@ -147,11 +147,11 @@ public class Casa extends AppCompatActivity implements NavigationView.OnNavigati
                 FragmentManager frman3=getSupportFragmentManager();
                 frman3.beginTransaction().replace(R.id.maincontaina,frags).commit();
                 break;
-            }/*case R.id.nav_settings:{
-                //startActivity(new Intent(Casa.this, Act_Map.class));
-                Toast.makeText(this, "This Activity under active progress", Toast.LENGTH_SHORT).show();
+            }case R.id.nav_prof:{
+                startActivity(new Intent(Casa.this, Act_myProfile.class));
+                //Toast.makeText(this, "This Activity under active progress", Toast.LENGTH_SHORT).show();
                 break;
-            }case R.id.nav_fullsite: {
+            }/*case R.id.nav_fullsite: {
                 try {
                     Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("www.gretsauniversity.ac.ke"));
                     startActivity(browserIntent);
@@ -162,6 +162,8 @@ public class Casa extends AppCompatActivity implements NavigationView.OnNavigati
                 }
                 break;
             }*/case R.id.nav_logout: {
+                Intent it = new Intent(Casa.this,Login.class);
+                startActivity(it);
                 finish();
                 break;
             }case R.id.nav_exit:{
