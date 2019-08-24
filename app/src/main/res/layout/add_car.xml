@@ -1,0 +1,496 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/mosta">
+
+            <LinearLayout
+                android:id="@+id/laymaker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Vehicle Maker"
+                        android:layout_weight="1"
+                        android:padding="16dp"
+                        android:textSize="16dp"/>
+
+                    <Spinner
+                        android:id="@+id/cmaka"
+                        android:layout_width="0dp"
+                        android:gravity="end"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:entries="@array/Vmaker_arrays"
+                        android:prompt="@string/Vmaker_prompt" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_height="1dp"
+                    android:background="#f71b03" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/laymodel"
+                android:layout_below="@+id/laybody"
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Model Type"
+                        android:layout_weight="1"
+                        android:padding="16dp"
+                        android:textSize="16dp"/>
+
+                    <Spinner
+                        android:id="@+id/cmodel"
+                        android:layout_width="0dp"
+                        android:gravity="end"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:entries="@array/Vbodyty_arrays"
+                        android:prompt="@string/Vbody_prompt"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_height="1dp"
+                    android:background="#f71b03" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/laybody"
+                android:layout_below="@+id/laymaker"
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Body Type"
+                        android:layout_weight="1"
+                        android:padding="16dp"
+                        android:textSize="16dp"/>
+
+                    <Spinner
+                        android:id="@+id/cbodtype"
+                        android:layout_width="0dp"
+                        android:gravity="end"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:entries="@array/Vmodel_arrays"
+                        android:prompt="@string/Vmodel_prompt"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_height="1dp"
+                    android:background="#f71b03" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layyear"
+                android:layout_below="@+id/laymodel"
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Year"
+                        android:layout_weight="1"
+                        android:padding="16dp"
+                        android:textSize="16dp"/>
+
+                    <Spinner
+                        android:id="@+id/cyear"
+                        android:layout_width="0dp"
+                        android:gravity="end"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:entries="@array/Vyear_arrays"
+                        android:prompt="@string/Vyear_prompt" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_height="1dp"
+                    android:background="#f71b03" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/laymile"
+                android:layout_below="@+id/layyear"
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Mileage"
+                        android:layout_weight="1"
+                        android:padding="16dp"
+                        android:textSize="16dp"/>
+
+                    <Spinner
+                        android:id="@+id/cmileage"
+                        android:layout_width="0dp"
+                        android:gravity="end"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:entries="@array/Vmileage_arrays"
+                        android:prompt="@string/Vmileage_prompt" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_height="1dp"
+                    android:background="#f71b03" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/laycond"
+                android:layout_below="@+id/laymile"
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Condition"
+                        android:layout_weight="1"
+                        android:padding="16dp"
+                        android:textSize="16dp"/>
+
+                    <Spinner
+                        android:id="@+id/ccond"
+                        android:layout_width="0dp"
+                        android:gravity="end"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:entries="@array/Vcond_arrays"
+                        android:prompt="@string/Vcond_prompt" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_height="1dp"
+                    android:background="#f71b03" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layeng"
+                android:layout_below="@+id/laycond"
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Engine Capacity"
+                        android:layout_weight="1"
+                        android:padding="16dp"
+                        android:textSize="16dp"/>
+
+                    <Spinner
+                        android:id="@+id/cengine"
+                        android:layout_width="0dp"
+                        android:gravity="end"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:entries="@array/Vbodyty_arrays"
+                        android:prompt="@string/Vbody_prompt" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_height="1dp"
+                    android:background="#f71b03" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/laycolor"
+                android:layout_below="@+id/layeng"
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Color"
+                        android:layout_weight="1"
+                        android:padding="16dp"
+                        android:textSize="16dp"/>
+
+                    <Spinner
+                        android:id="@+id/ccolor"
+                        android:layout_width="0dp"
+                        android:gravity="end"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:entries="@array/Vcolor_arrays"
+                        android:prompt="@string/Vcolor_prompt" />
+
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_height="1dp"
+                    android:background="#f71b03" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/laytrans"
+                android:layout_below="@+id/laycolor"
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Transmission"
+                        android:layout_weight="1"
+                        android:padding="16dp"
+                        android:textSize="16dp"/>
+
+                    <Spinner
+                        android:id="@+id/ctrans"
+                        android:layout_width="0dp"
+                        android:gravity="end"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:entries="@array/Vtrans_arrays"
+                        android:prompt="@string/Vtrans_prompt" />
+
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_height="1dp"
+                    android:background="#f71b03" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layinte"
+                android:layout_below="@+id/laytrans"
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Interior"
+                        android:layout_weight="1"
+                        android:padding="16dp"
+                        android:textSize="16dp"/>
+
+                    <Spinner
+                        android:id="@+id/cinte"
+                        android:layout_width="0dp"
+                        android:gravity="end"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:entries="@array/Vinte_arrays"
+                        android:prompt="@string/Vinte_prompt" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_height="1dp"
+                    android:background="#f71b03" />
+
+            </LinearLayout>
+
+            <!----><LinearLayout
+                android:id="@+id/layfuel"
+                android:layout_below="@+id/layinte"
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Fuel Type"
+                        android:layout_weight="1"
+                        android:padding="16dp"
+                        android:textSize="16dp"/>
+
+                    <Spinner
+                        android:id="@+id/cfuel"
+                        android:layout_width="0dp"
+                        android:gravity="end"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:entries="@array/Vfuel_arrays"
+                        android:prompt="@string/Vfuel_prompt" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_height="1dp"
+                    android:background="#f71b03" />
+
+            </LinearLayout><!---->
+
+            <EditText
+                android:id="@+id/cdesc"
+                android:hint="Other General Description"
+                android:layout_below="@+id/layfuel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="16dp"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:ems="10"
+                android:inputType="textMultiLine" />
+
+            <Button
+                android:id="@+id/fina"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_below="@+id/cdesc"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:text="Proceed" />
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

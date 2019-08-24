@@ -2,7 +2,10 @@ package com.inc.niccher.task1;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -12,12 +15,24 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.NetworkPolicy;
+import com.squareup.picasso.Picasso;
 
 public class Casa extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -30,8 +45,13 @@ public class Casa extends AppCompatActivity implements NavigationView.OnNavigati
     ImageView usr_img,popimg;
     Dialog myDialog;
 
-    String gEmail,gUsername,gimgProfile,had;
+    String gEmail,gUsername,gProfile,had;
+
     Intent targ=null;
+
+    FirebaseAuth mAuth;
+    FirebaseUser userf;
+    DatabaseReference dref1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,9 +84,6 @@ public class Casa extends AppCompatActivity implements NavigationView.OnNavigati
             public void onClick(View view) {}
         });
 
-
-        targ=getIntent();
-
         GetTarget();
         LoadUsa();
     }
@@ -89,7 +106,38 @@ public class Casa extends AppCompatActivity implements NavigationView.OnNavigati
         had=null;
     }
 
-    private void LoadUsa() {}
+    private void LoadUsa() {
+        try {
+            dref1= FirebaseDatabase.getInstance().getReference("Task1Admin").child(userf.getUid());
+            dref1.keepSynced(true);
+
+            dref1.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    //aUid, aEmail, aUsername, aPhone, aProfile, aProfilethumb;
+                    gUsername= (String) dataSnapshot.child("aUsername").getValue();
+                    gEmail= (String) dataSnapshot.child("aEmail").getValue();
+                    gProfile=dataSnapshot.child("aProfile").getValue().toString();
+                    usr_name.setText(gUsername);
+                    usr_email.setText(gEmail);
+
+                    try {
+                        Picasso.get().load(gProfile).into(usr_img);
+
+                    }catch (Exception ex){
+                        Picasso.get().load(R.drawable.ic_defuser).into(usr_img);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }catch (Exception ex){
+            Log.e("Casa ", "LoadUsa: \n" +ex.getMessage());
+        }
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -130,16 +178,14 @@ public class Casa extends AppCompatActivity implements NavigationView.OnNavigati
 
         switch (item.getItemId()){
             case R.id.nav_postv:{
-                frags=new Frag_PostV();
-                getSupportActionBar().setTitle("Posted Vehicles");
-                FragmentManager frman1=getSupportFragmentManager();
-                frman1.beginTransaction().replace(R.id.maincontaina,frags).commit();
+                startActivity(new Intent(Casa.this, Add_Car.class));
                 break;
             }case R.id.nav_postr:{
-                frags=new Frag_PostE();
+                startActivity(new Intent(Casa.this, Add_Estate.class));
+                /*frags=new Frag_PostE();
                 getSupportActionBar().setTitle("Posted Estates");
                 FragmentManager frman3=getSupportFragmentManager();
-                frman3.beginTransaction().replace(R.id.maincontaina,frags).commit();
+                frman3.beginTransaction().replace(R.id.maincontaina,frags).commit();*/
                 break;
             }case R.id.nav_add:{
                 frags=new Frag_Add();
@@ -151,17 +197,7 @@ public class Casa extends AppCompatActivity implements NavigationView.OnNavigati
                 startActivity(new Intent(Casa.this, Act_myProfile.class));
                 //Toast.makeText(this, "This Activity under active progress", Toast.LENGTH_SHORT).show();
                 break;
-            }/*case R.id.nav_fullsite: {
-                try {
-                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("www.gretsauniversity.ac.ke"));
-                    startActivity(browserIntent);
-                } catch (Exception ex){
-                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.gretsauniversity.ac.ke"));
-                    //Toast.makeText(Casa.this, "Error ->"+ex.getMessage(), Toast.LENGTH_SHORT).show();
-                    startActivity(browserIntent);
-                }
-                break;
-            }*/case R.id.nav_logout: {
+            }case R.id.nav_logout: {
                 Intent it = new Intent(Casa.this,Login.class);
                 startActivity(it);
                 finish();
@@ -182,5 +218,4 @@ public class Casa extends AppCompatActivity implements NavigationView.OnNavigati
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
 }

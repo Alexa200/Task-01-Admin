@@ -1,5 +1,6 @@
 package com.inc.niccher.task1;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -67,33 +68,37 @@ public class Frag_Home extends Fragment {
         cvadcar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Frag_AddCar fracar=new Frag_AddCar();
+                /*Add_Car fracar=new Add_Car();
 
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.maincontaina, fracar);
                 fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
+                fragmentTransaction.commit();*/
+
+                startActivity(new Intent(getActivity(), Add_Car.class));
             }
         });
 
         cvadest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Frag_AddEstate fraest=new Frag_AddEstate();
+                /*Add_Estate fraest=new Add_Estate();
 
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.maincontaina, fraest);
                 fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
+                fragmentTransaction.commit();*/
+
+                startActivity(new Intent(getActivity(), Add_Estate.class));
             }
         });
 
         cvprof.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Frag_AddCar fracar=new Frag_AddCar();
+                Add_Car fracar=new Add_Car();
 
                 /*FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

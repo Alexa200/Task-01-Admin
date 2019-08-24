@@ -3,4 +3,120 @@
 
     <string name="dopen">Opened</string>
     <string name="dclose">Closed</string>
+
+    <string name="Vmaker_prompt">Vehicle Maker</string>
+
+    <string-array name="Vmaker_arrays">
+        <item>Manufacturer</item>
+        <item>Toyota</item>
+        <item>Nissan</item>
+        <item>Subaru</item>
+        <item>Honda</item>
+        <item>Mazda</item>
+        <item>Volkswagen</item>
+        <item>Land Rover</item>
+    </string-array>
+
+    <string name="Vbody_prompt">Model Type</string>
+
+    <string-array name="Vbodyty_arrays">
+        <item>Model Type</item>
+        <item>Toyota</item>
+        <item>Nissan</item>
+        <item>Subaru</item>
+        <item>Honda</item>
+        <item>Mazda</item>
+        <item>Volkswagen</item>
+        <item>Land Rover</item>
+    </string-array>
+
+    <string name="Vyear_prompt">Year</string>
+
+    <string-array name="Vyear_arrays">
+        <item>Year of Make</item>
+        <item>2019 </item>
+        <item>2018 </item>
+        <item>2017 </item>
+        <item>2016 </item>
+        <item>2015 </item>
+        <item>2014 </item>
+        <item>2013 </item>
+        <item>2012 </item>
+        <item>2011 </item>
+    </string-array>
+
+    <string name="Vmodel_prompt">Body Type</string>
+
+    <string-array name="Vmodel_arrays">
+        <item>Body Type</item>
+        <item>Saloon</item>
+        <item>Hatchbacks</item>
+        <item>Pick Ups</item>
+        <item>Trucks</item>
+        <item>Buses</item>
+        <item>Vans</item>
+        <item>Covertibles</item>
+        <item>Station Wagon</item>
+        <item>Bikes</item>
+    </string-array>
+
+    <string name="Vmileage_prompt">Mileage</string>
+
+    <string-array name="Vmileage_arrays">
+        <item>Miles Travelled</item>
+        <item>Below 100 km</item>
+        <item>Below 500 km</item>
+        <item>Below 1000 km</item>
+        <item>Below 5000 km</item>
+        <item>Below 10000 km</item>
+        <item>Over 10000 km</item>
+    </string-array>
+
+    <string name="Vtrans_prompt">Transmision</string>
+
+    <string-array name="Vtrans_arrays">
+        <item>Transmission</item>
+        <item>Automatic</item>
+        <item>Manual</item>
+    </string-array>
+
+    <string name="Vcond_prompt">Condition</string>
+
+    <string-array name="Vcond_arrays">
+        <item>Condition</item>
+        <item>Brand New</item>
+        <item>Foreign Used</item>
+        <item>Locally Used</item>
+    </string-array>
+
+    <string name="Vinte_prompt">Interior</string>
+
+    <string-array name="Vinte_arrays">
+        <item>Interior</item>
+        <item>Cloth</item>
+        <item>Leather</item>
+    </string-array>
+
+    <string name="Vfuel_prompt">Fuel Type</string>
+
+    <string-array name="Vfuel_arrays">
+        <item>Fuel Type</item>
+        <item>Diesel</item>
+        <item>Electric</item>
+        <item>Hybrid</item>
+        <item>Petrol</item>
+    </string-array>
+
+
+    <string name="Vcolor_prompt">Color</string>
+
+    <string-array name="Vcolor_arrays">
+        <item>Color</item>
+        <item>White</item>
+        <item>Silver</item>
+        <item>Black</item>
+        <item>Grey</item>
+        <item>Red</item>
+        <item>Blue</item>
+    </string-array>
 </resources>

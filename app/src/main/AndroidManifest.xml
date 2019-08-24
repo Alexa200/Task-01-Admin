@@ -29,6 +29,15 @@
         <activity android:name=".PhoneReq"/>
         <activity android:name=".PhoneTest"/>
         <activity android:name=".Act_myProfile"/>
+        <activity android:name=".Add_Car"/>
+        <activity android:name=".Add_Estate"/>
+        <activity android:name=".Add_CarImgs"/>
+
+        <activity android:name=".UserDefine"/>
+
+        <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat"/>
+
         <activity android:name=".Casa"
             android:theme="@style/AppTheme2"/>
     </application>
