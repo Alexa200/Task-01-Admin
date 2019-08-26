@@ -51,7 +51,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:indeterminateOnly="true"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     android:layout_below="@+id/upload"/>
 
             </RelativeLayout>
@@ -62,14 +62,13 @@
                 android:layout_height="wrap_content"
                 android:background="#f2b6ed">
 
-                <Button
-                    android:layout_width="wrap_content"
+                <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Finish"
-                    android:id="@+id/Finish"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_centerHorizontal="true" />
+                    android:id="@+id/recypostcars">
+
+
+                </android.support.v7.widget.RecyclerView>
 
             </RelativeLayout>
 

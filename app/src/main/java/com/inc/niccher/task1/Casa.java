@@ -71,6 +71,9 @@ public class Casa extends AppCompatActivity implements NavigationView.OnNavigati
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         naviw= (NavigationView) findViewById(R.id.nav_viu);
 
+        mAuth= FirebaseAuth.getInstance();
+        userf=mAuth.getCurrentUser();
+
         View viu=naviw.inflateHeaderView(R.layout.nav_headah);
 
         naviw.setNavigationItemSelectedListener(Casa.this);
@@ -89,24 +92,25 @@ public class Casa extends AppCompatActivity implements NavigationView.OnNavigati
     }
 
     private void GetTarget() {
-        had=targ.getStringExtra("Target")+"-";
+        /*had=targ.getStringExtra("Target")+"-";
         if (had.equals("Userlist-")){
             Fragment fragu=null;
             fragu=new Frag_PostV();
             FragmentManager frman0=getSupportFragmentManager();
             frman0.beginTransaction().replace(R.id.maincontaina,fragu).commit();
-        }else {
+        }else {*/
             Fragment frags=null;
             getSupportActionBar().setTitle("Dashboard");
             frags=new Frag_Home();
             FragmentManager frman0=getSupportFragmentManager();
             frman0.beginTransaction().replace(R.id.maincontaina,frags).commit();
-        }
+        //}
 
         had=null;
     }
 
     private void LoadUsa() {
+        Toast.makeText(this, "Uuid"+userf.getUid(), Toast.LENGTH_LONG).show();
         try {
             dref1= FirebaseDatabase.getInstance().getReference("Task1Admin").child(userf.getUid());
             dref1.keepSynced(true);
@@ -126,6 +130,7 @@ public class Casa extends AppCompatActivity implements NavigationView.OnNavigati
 
                     }catch (Exception ex){
                         Picasso.get().load(R.drawable.ic_defuser).into(usr_img);
+                        Toast.makeText(Casa.this, "Picasso.get() Error"+ex, Toast.LENGTH_SHORT).show();
                     }
                 }
 

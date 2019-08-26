@@ -12,22 +12,19 @@
         android:background="#8a8a8f">
 
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            xmlns:app="http://schemas.android.com/apk/res-auto"
+        <ImageView xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/com_usaprof"
-            android:layout_width="200dp"
+            android:layout_width="match_parent"
             android:layout_height="200dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="30dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
             android:clickable="true"
             android:elevation="5dp"
             android:padding="20dp"
             android:scaleType="centerCrop"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_defuser"
-            app:civ_border_color="#ffffff"
-            app:civ_border_width="3dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" />
+            android:src="@drawable/ic_defuser" />
 
         <RelativeLayout
             android:id="@+id/profile_layout"

@@ -15,9 +15,26 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
+import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
+import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageView;
 
 public class Act_myProfile extends AppCompatActivity {
 
@@ -29,8 +46,11 @@ public class Act_myProfile extends AppCompatActivity {
     ImageView popimg;
     Dialog myDialog;
 
-    //FirebaseAuth mAuth;
-    //FirebaseUser userf;
+    FirebaseAuth mAuth;
+    FirebaseUser userf;
+    DatabaseReference dref1,mDatabaseRef;
+    StorageTask mUploadTask;
+    StorageReference mStorageRef;
 
     ProgressDialog pds;
     String targeteml,targetuid,usaprof,usacova;
@@ -46,9 +66,12 @@ public class Act_myProfile extends AppCompatActivity {
 
         getdef=getIntent();
 
-        //mAuth= FirebaseAuth.getInstance();
+        mAuth= FirebaseAuth.getInstance();
 
-        //userf=mAuth.getCurrentUser();
+        userf=mAuth.getCurrentUser();
+
+        dref1= FirebaseDatabase.getInstance().getReference("Task1Admin").child(userf.getUid());
+        dref1.keepSynced(true);
 
         GetState();
 
@@ -61,12 +84,12 @@ public class Act_myProfile extends AppCompatActivity {
 
         pds=new ProgressDialog(this);
         myDialog=new Dialog(this);
-        //Findame();
+        Findame();
 
         usapic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //PopingProf();
+                PopingProf();
             }
         });
 
@@ -83,32 +106,30 @@ public class Act_myProfile extends AppCompatActivity {
     }
 
     private void GetState(){
-        /*FirebaseUser fuse=mAuth.getCurrentUser();
+        FirebaseUser fuse=mAuth.getCurrentUser();
         if (fuse!=null){}
         else {
-            startActivity(new Intent(this,UserLogin.class));
+            startActivity(new Intent(this,Login.class));
             finish();
-        }*/
+        }
     }
 
-    /*private void Findame(){
+    private void Findame(){
         pds.setMessage("Fetching User Data, Please Wait");
         pds.show();
-        DatabaseReference dref4=FirebaseDatabase.getInstance().getReference("GretsaUsers").child(targetuid);
+        DatabaseReference dref4=FirebaseDatabase.getInstance().getReference("Task1Admin").child(userf.getUid());
         dref4.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                usaname.setText((String) dataSnapshot.child("gUsername").getValue());
-                usaphone.setText((String) dataSnapshot.child("gPhone").getValue());
-                usaemail.setText((String) dataSnapshot.child("gEmail").getValue());
-                usaprof= (String) dataSnapshot.child("gProfile").getValue();
-                usacova= (String) dataSnapshot.child("gCover").getValue();
+                usaname.setText((String) dataSnapshot.child("aUsername").getValue());
+                usaphone.setText((String) dataSnapshot.child("aPhone").getValue());
+                usaemail.setText((String) dataSnapshot.child("aEmail").getValue());
+                usaprof= (String) dataSnapshot.child("aProfile").getValue();
 
                 try {
-                    Picasso.get().load((String) dataSnapshot.child("gProfile").getValue()).into(usapic);
-                    Picasso.get().load((String) dataSnapshot.child("gCover").getValue()).into(usacover);
+                    Picasso.get().load((String) dataSnapshot.child("aProfile").getValue()).into(usapic);
                 }catch (Exception ex){
-                    Toast.makeText(Act_Usas.this, "Error \n"+ex.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Act_myProfile.this, "Error \n"+ex.getMessage(), Toast.LENGTH_SHORT).show();
                 }
 
                 pds.dismiss();
@@ -117,7 +138,7 @@ public class Act_myProfile extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 pds.dismiss();
-                Toast.makeText(Act_Usas.this, "Error \n"+databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(Act_myProfile.this, "Error \n"+databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -145,26 +166,4 @@ public class Act_myProfile extends AppCompatActivity {
         myDialog.show();
     }
 
-    private void PopingCova() {
-        myDialog.setContentView(R.layout.part_poppa);
-        popclos=(TextView) myDialog.findViewById(R.id.popclose);
-        popimg= (ImageView) myDialog.findViewById(R.id.popimg);
-        popclos.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                myDialog.dismiss();
-            }
-        });
-        Picasso.get().load(usacova).networkPolicy(NetworkPolicy.OFFLINE).into(popimg, new Callback() {
-            @Override
-            public void onSuccess() {}
-
-            @Override
-            public void onError(Exception e) {
-                Picasso.get().load(usacova).into(popimg);
-            }
-        });
-        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        myDialog.show();
-    }*/
 }
