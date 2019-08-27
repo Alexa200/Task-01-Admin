@@ -119,4 +119,34 @@
         <item>Red</item>
         <item>Blue</item>
     </string-array>
+
+    <string name="Vengine_prompt">Color</string>
+
+    <string-array name="Vengine_arrays">
+        <item>Engine Capacity</item>
+        <item>700 cc</item>
+        <item>800 cc</item>
+        <item>900 cc</item>
+        <item>1000 cc</item>
+        <item>1100 cc</item>
+        <item>1200 cc</item>
+        <item>1300 cc</item>
+        <item>1400 cc</item>
+        <item>1500 cc</item>
+        <item>1600 cc</item>
+        <item>1700 cc</item>
+        <item>1800 cc</item>
+        <item>1900 cc</item>
+        <item>2000 cc</item>
+        <item>2100 cc</item>
+        <item>2200 cc</item>
+        <item>2300 cc</item>
+        <item>2400 cc</item>
+        <item>5500 cc</item>
+        <item>2600 cc</item>
+        <item>2700 cc</item>
+        <item>2800 cc</item>
+        <item>2900 cc</item>
+        <item>3000 cc</item>
+    </string-array>
 </resources>

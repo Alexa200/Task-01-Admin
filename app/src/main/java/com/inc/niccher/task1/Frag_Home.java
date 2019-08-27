@@ -99,12 +99,7 @@ public class Frag_Home extends Fragment {
             @Override
             public void onClick(View view) {
                 Add_Car fracar=new Add_Car();
-
-                /*FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.maincontaina, fracar);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();*/
+                startActivity(new Intent(getActivity(), Act_myProfile.class));
             }
         });
 

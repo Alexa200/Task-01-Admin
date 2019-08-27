@@ -92,25 +92,18 @@ public class Casa extends AppCompatActivity implements NavigationView.OnNavigati
     }
 
     private void GetTarget() {
-        /*had=targ.getStringExtra("Target")+"-";
-        if (had.equals("Userlist-")){
-            Fragment fragu=null;
-            fragu=new Frag_PostV();
-            FragmentManager frman0=getSupportFragmentManager();
-            frman0.beginTransaction().replace(R.id.maincontaina,fragu).commit();
-        }else {*/
-            Fragment frags=null;
-            getSupportActionBar().setTitle("Dashboard");
-            frags=new Frag_Home();
-            FragmentManager frman0=getSupportFragmentManager();
-            frman0.beginTransaction().replace(R.id.maincontaina,frags).commit();
-        //}
+
+        Fragment frags=null;
+        getSupportActionBar().setTitle("Dashboard");
+        frags=new Frag_Home();
+        FragmentManager frman0=getSupportFragmentManager();
+        frman0.beginTransaction().replace(R.id.maincontaina,frags).commit();
 
         had=null;
     }
 
     private void LoadUsa() {
-        Toast.makeText(this, "Uuid"+userf.getUid(), Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, "Uuid"+userf.getUid(), Toast.LENGTH_LONG).show();
         try {
             dref1= FirebaseDatabase.getInstance().getReference("Task1Admin").child(userf.getUid());
             dref1.keepSynced(true);
@@ -183,14 +176,17 @@ public class Casa extends AppCompatActivity implements NavigationView.OnNavigati
 
         switch (item.getItemId()){
             case R.id.nav_postv:{
-                startActivity(new Intent(Casa.this, Add_Car.class));
+                frags=new Frag_PostV();
+                getSupportActionBar().setTitle("Posted Estates");
+                FragmentManager frman2=getSupportFragmentManager();
+                frman2.beginTransaction().replace(R.id.maincontaina,frags).commit();
                 break;
             }case R.id.nav_postr:{
-                startActivity(new Intent(Casa.this, Add_Estate.class));
-                /*frags=new Frag_PostE();
+                //startActivity(new Intent(Casa.this, Add_Estate.class));
+                frags=new Frag_PostE();
                 getSupportActionBar().setTitle("Posted Estates");
                 FragmentManager frman3=getSupportFragmentManager();
-                frman3.beginTransaction().replace(R.id.maincontaina,frags).commit();*/
+                frman3.beginTransaction().replace(R.id.maincontaina,frags).commit();
                 break;
             }case R.id.nav_add:{
                 frags=new Frag_Add();

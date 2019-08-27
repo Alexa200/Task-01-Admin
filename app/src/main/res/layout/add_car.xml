@@ -286,8 +286,8 @@
                         android:gravity="end"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:entries="@array/Vbodyty_arrays"
-                        android:prompt="@string/Vbody_prompt" />
+                        android:entries="@array/Vengine_arrays"
+                        android:prompt="@string/Vengine_prompt" />
 
                 </LinearLayout>
 
@@ -468,7 +468,7 @@
 
             <EditText
                 android:id="@+id/cdesc"
-                android:hint="Other General Description"
+                android:hint="Location,General Description"
                 android:layout_below="@+id/layfuel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -478,7 +478,6 @@
                 android:textStyle="bold"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:ems="10"
                 android:inputType="textMultiLine" />
 
 
@@ -517,7 +516,7 @@
                 android:layout_below="@+id/upload"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
-                android:text="Proceed" />
+                android:text="Finish" />
 
         </RelativeLayout>
 

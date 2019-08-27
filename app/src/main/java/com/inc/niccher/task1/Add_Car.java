@@ -11,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.INotificationSideChannel;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -49,7 +50,8 @@ public class Add_Car extends AppCompatActivity {
     private Spinner vmaker,vbody,vmodel,vyear,vmileage,vcondi,vng,vcolo,vtrans,vint,vfuel;
     private EditText bigdesc;
     private Button btnSubmit,btnupload;
-    private String Desc;
+    private int coun=0;
+    private String uploadId ;
     private ProgressDialog pds;
 
     private ImageView imgsel;
@@ -86,6 +88,9 @@ public class Add_Car extends AppCompatActivity {
         mStorageRef = FirebaseStorage.getInstance().getReference("VehicleImgs");
 
         dref = FirebaseDatabase.getInstance().getReference("Posteds").child(userf.getUid());
+
+        uploadId= dref.push().getKey();
+        Log.e("Ids ", "dref.push().getKey()  "+uploadId );
 
         pds2=new ProgressDialog(this);
 
@@ -133,19 +138,6 @@ public class Add_Car extends AppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Desc="Car Maker : " +String.valueOf(vmaker.getSelectedItem())+"\n"+
-                    "Car Body : " +String.valueOf(vbody.getSelectedItem())+"\n"+
-                    "Car Model : " +String.valueOf(vmodel.getSelectedItem())+"\n"+
-                    "Car Year : " +String.valueOf(vyear.getSelectedItem())+"\n"+
-                    "Car Mileage : " +String.valueOf(vmileage.getSelectedItem())+"\n"+
-                    "Car Condition : " +String.valueOf(vcondi.getSelectedItem())+"\n"+
-                    "Car Engine : " +String.valueOf(vng.getSelectedItem())+"\n"+
-                    "Car Color : " +String.valueOf(vcolo.getSelectedItem())+"\n"+
-                    "Car Transmision : " +String.valueOf(vtrans.getSelectedItem())+"\n"+
-                    "Car Interior : " +String.valueOf(vint.getSelectedItem())+"\n"+
-                    "Car Fuel : " +String.valueOf(vfuel.getSelectedItem())+"\n"+
-                        "Car Desc : "+bigdesc.getText().toString();
-
                 SendComit();
             }
 
@@ -179,24 +171,6 @@ public class Add_Car extends AppCompatActivity {
 
     }
 
-    /*private void CarDesc(){
-        CarConfig upload = new CarConfig(String.valueOf(vmaker.getSelectedItem()),
-                String.valueOf(vbody.getSelectedItem()),
-                String.valueOf(vmodel.getSelectedItem()),
-                String.valueOf(vyear.getSelectedItem()),
-                String.valueOf(vmileage.getSelectedItem()),
-                String.valueOf(vcondi.getSelectedItem()),
-                String.valueOf(vng.getSelectedItem()),
-                String.valueOf(vcolo.getSelectedItem()),
-                String.valueOf(vtrans.getSelectedItem()),
-                String.valueOf(vint.getSelectedItem()),
-                String.valueOf(vfuel.getSelectedItem()),
-                bigdesc.getText().toString(),
-                "Time");
-
-        dref.child("Vehicles").setValue(upload);
-    }*/
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -228,34 +202,31 @@ public class Add_Car extends AppCompatActivity {
 
         DatabaseReference mDatabaseRef= FirebaseDatabase.getInstance().getReference("Posteds").child(userf.getUid()).child("Vehicles");//.push();
 
-        final String uploadId = mDatabaseRef.push().getKey();
-
         HashMap<String , Object> hasm2=new HashMap<String, Object>();
 
-        hasm2.put("Maker : " ,String.valueOf(vmaker.getSelectedItem()));
-        hasm2.put("Body : " ,String.valueOf(vbody.getSelectedItem()));
-        hasm2.put("Model : " ,String.valueOf(vmodel.getSelectedItem()));
-        hasm2.put("Year : " ,String.valueOf(vyear.getSelectedItem()));
-        hasm2.put("Mileage : " ,String.valueOf(vmileage.getSelectedItem()));
-        hasm2.put("Condition : ",String.valueOf(vcondi.getSelectedItem()));
-        hasm2.put("Engine : " ,String.valueOf(vng.getSelectedItem()));
-        hasm2.put("Color : " ,String.valueOf(vcolo.getSelectedItem()));
-        hasm2.put("Transmision : ",String.valueOf(vtrans.getSelectedItem()));
-        hasm2.put("Interior : " ,String.valueOf(vint.getSelectedItem()));
-        hasm2.put("Fuel : " ,String.valueOf(vfuel.getSelectedItem()));
-        hasm2.put("Desc : ",bigdesc.getText().toString());
-        hasm2.put("Key",uploadId);
-        hasm2.put("Posttime",ctim+"--"+cdat);
+        hasm2.put("cMaker" ,String.valueOf(vmaker.getSelectedItem()));
+        hasm2.put("cBody" ,String.valueOf(vbody.getSelectedItem()));
+        hasm2.put("cModel" ,String.valueOf(vmodel.getSelectedItem()));
+        hasm2.put("cYear" ,String.valueOf(vyear.getSelectedItem()));
+        hasm2.put("cMileage" ,String.valueOf(vmileage.getSelectedItem()));
+        hasm2.put("cCondition",String.valueOf(vcondi.getSelectedItem()));
+        hasm2.put("cEngine" ,String.valueOf(vng.getSelectedItem()));
+        hasm2.put("cColor" ,String.valueOf(vcolo.getSelectedItem()));
+        hasm2.put("cTransmision",String.valueOf(vtrans.getSelectedItem()));
+        hasm2.put("cInterior" ,String.valueOf(vint.getSelectedItem()));
+        hasm2.put("cFuel" ,String.valueOf(vfuel.getSelectedItem()));
+        hasm2.put("cDesc",bigdesc.getText().toString());
+        hasm2.put("cKey",uploadId);
+        hasm2.put("cTime","On "+cdat+" At "+ctim);
 
         mDatabaseRef.child(uploadId).updateChildren(hasm2).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
 
                 pds.dismiss();
-
-                Intent carimg=new Intent(Add_Car.this, Add_CarImgs.class);
-                carimg.putExtra("PostUUIDCode",uploadId);
-                startActivity(carimg);
+                //Intent carimg=new Intent(Add_Car.this, PostCarD.class);
+                //carimg.putExtra("PostUUIDCode",uploadId);
+                //startActivity(carimg);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -283,14 +254,33 @@ public class Add_Car extends AppCompatActivity {
                             result.addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
                                 public void onSuccess(Uri uri) {
-                                    UploadCar upload = new UploadCar("Img"+System.currentTimeMillis()+ "",uri.toString());
-                                    String uploadId = dref.push().getKey();
-                                    drefup=FirebaseDatabase.getInstance().getReference("Posteds/"+userf.getUid()+"/Vehicles"+uploadId);
 
-                                    drefup.child("Pics").setValue(upload);
+                                    drefup=FirebaseDatabase.getInstance().getReference("Posteds/"+userf.getUid()+"/Vehicles/"+uploadId);
+
+                                    HashMap<String , Object> hasm3=new HashMap<String, Object>();
+
+                                    hasm3.put("cImg"+coun/*System.currentTimeMillis()*/ ,uri.toString());
+                                    coun=coun+1;
+                                    //Log.e("mUploadTask ", "onSuccess: "+coun );
+                                    uri_image=null;
+
+                                    drefup.updateChildren(hasm3).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            pds.dismiss();
+                                            Toast.makeText(Add_Car.this, "Add Image URL addOnFailureListener\n"+e.getMessage(), Toast.LENGTH_LONG).show();
+                                        }
+                                    });
+
 
                                     Picasso.get().load(R.drawable.ic_addcimg).placeholder(R.drawable.ic_addcimg).into(imgsel);
                                     pds2.dismiss();
+
+                                    Toast.makeText(Add_Car.this, "Upload Succesfull", Toast.LENGTH_SHORT).show();
 
                                 }
                             });
