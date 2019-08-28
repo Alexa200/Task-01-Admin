@@ -5,10 +5,13 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -25,19 +28,28 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import static android.R.id.list;
+
 
 public class PostCarD extends AppCompatActivity {
 
     ImageView vImg0;
+    ViewPager viewP;
 
     TextView vMaker,vBody,vModel,vYear,vMileage,vvondition,vEngine,vvolor,vTransmision,vInterior,vFuel,vDesv,vKey,vTime;
 
     ProgressDialog pds2;
 
+    private String pat,imageUrls[],imagelement[];
+    List<String> urllist = new ArrayList<String>();
+    List<String> urlelement = new ArrayList<String>();
+    int imcount;
 
-    private String pat;
-
-    Uri uri_image;
+    private FloatingActionButton fab;
 
     Intent getta;
 
@@ -65,10 +77,23 @@ public class PostCarD extends AppCompatActivity {
 
         if (getta.getStringExtra("PostUUIDCode")==null){
             Toast.makeText(this, "No Cross Data", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(PostCarD.this, Add_Car.class));
+            finish();
+
+            Intent hom=new Intent(PostCarD.this,Casa.class);
+            hom.putExtra("PostUUIDCode","Posts");
+            startActivity(hom);
         }else {
             pat=getta.getStringExtra("PostUUIDCode");
         }
+
+        fab=findViewById(R.id.postedit);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(PostCarD.this, "Hhe", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         vMaker=findViewById(R.id.disp_maker);
         vBody=findViewById(R.id.disp_body);
@@ -83,7 +108,9 @@ public class PostCarD extends AppCompatActivity {
         vDesv=findViewById(R.id.disp_desc);
         vTime=findViewById(R.id.disp_time);
 
-        vImg0=findViewById(R.id.disp_imgs);
+        //vImg0=findViewById(R.id.disp_imgs);
+
+        viewP= (ViewPager) findViewById(R.id.view_pager);
 
         LoadPost();
     }
@@ -91,7 +118,6 @@ public class PostCarD extends AppCompatActivity {
     private void LoadPost(){
         DatabaseReference dref3 = FirebaseDatabase.getInstance().getReference("Posteds/"+userf.getUid()+"/Vehicles/"+pat);
         dref3.keepSynced(true);
-
         try {
             dref3.addValueEventListener(new ValueEventListener() {
                 @Override
@@ -111,7 +137,8 @@ public class PostCarD extends AppCompatActivity {
                     vTime.setText((String) dataSnapshot.child("cTime").getValue());
 
                     try {
-                        Picasso.get().load((String) dataSnapshot.child("cImg0").getValue()).into(vImg0);
+                        //Picasso.get().load((String) dataSnapshot.child("cImg0").getValue()).into(vImg0);
+                        Counta();
 
                     }catch (Exception ex){
                         Picasso.get().load(R.drawable.ic_defuser).into(vImg0);
@@ -129,12 +156,53 @@ public class PostCarD extends AppCompatActivity {
         }
     }
 
+    private void Counta(){
+        DatabaseReference dref3 = FirebaseDatabase.getInstance().getReference("Posteds/"+userf.getUid()+"/Vehicles/"+pat);
+        dref3.keepSynced(true);
+
+        dref3.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                imcount= (int) dataSnapshot.getChildrenCount();
+
+                String nod="cImg",fina = null;
+
+                for (int i=0;i<10;i++){
+                    fina=nod+i;
+                    //Log.e("Array Maker", "onDataChange: "+fina );
+                    if (dataSnapshot.child(fina).exists()){
+                        urllist.add(fina);
+                        urlelement.add((String) dataSnapshot.child(fina).getValue());
+                    }
+                }
+
+                //Log.e("Url List", " Imgs : "+urllist );
+                //Log.e("Url List Elements ", " Imgs : "+urlelement );
+                imageUrls=Arrays.copyOf(urllist.toArray(), urllist.size(),String[].class);
+                imagelement=Arrays.copyOf(urlelement.toArray(), urlelement.size(),String[].class);
+                //Log.e("Urls Array", " Imgs : "+ Arrays.toString(imageUrls) );
+                //Log.e("Urls Array", " Imgs : "+ Arrays.toString(imagelement) );
+
+                CarSlidAdpta adapter = new CarSlidAdpta(PostCarD.this, imagelement);
+                viewP.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int idd=item.getItemId();
         if (idd==android.R.id.home){
             finish();
-            startActivity(new Intent(PostCarD.this,Add_Car.class));
+
+            Intent hom=new Intent(PostCarD.this,Casa.class);
+            hom.putExtra("PostUUIDCode","Posts");
+            startActivity(hom);
         }
         return super.onOptionsItemSelected(item);
     }

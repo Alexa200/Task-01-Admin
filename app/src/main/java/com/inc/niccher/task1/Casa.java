@@ -87,19 +87,40 @@ public class Casa extends AppCompatActivity implements NavigationView.OnNavigati
             public void onClick(View view) {}
         });
 
+        targ=getIntent();
+
         GetTarget();
         LoadUsa();
     }
 
     private void GetTarget() {
+        try {
+            had=targ.getStringExtra("PostUUIDCode")+"--";
+            Log.e("getStringExtra", "GetTarget: "+had );
+            if (had.equals("Posts--")){
+                Fragment frags=null;
+                getSupportActionBar().setTitle("Posts");
+                frags=new Frag_PostV();
+                FragmentManager frman0=getSupportFragmentManager();
+                frman0.beginTransaction().replace(R.id.maincontaina,frags).commit();
 
-        Fragment frags=null;
-        getSupportActionBar().setTitle("Dashboard");
-        frags=new Frag_Home();
-        FragmentManager frman0=getSupportFragmentManager();
-        frman0.beginTransaction().replace(R.id.maincontaina,frags).commit();
+            }else {
+                Fragment frags=null;
+                getSupportActionBar().setTitle("Dashboard");
+                frags=new Frag_Home();
+                FragmentManager frman0=getSupportFragmentManager();
+                frman0.beginTransaction().replace(R.id.maincontaina,frags).commit();
+            }
+            had=null;
+        }catch (Exception es){
+            Fragment frags=null;
+            getSupportActionBar().setTitle("Dashboard");
+            frags=new Frag_Home();
+            FragmentManager frman0=getSupportFragmentManager();
+            frman0.beginTransaction().replace(R.id.maincontaina,frags).commit();
 
-        had=null;
+            Log.e("getStringError", "GetTarget: "+es );
+        }
     }
 
     private void LoadUsa() {

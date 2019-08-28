@@ -3,23 +3,30 @@ package com.inc.niccher.task1;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -118,10 +125,29 @@ public class Frag_PostV extends Fragment {
     }
 
     @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        //inflater = getActivity().getMenuInflater();
+        inflater.inflate(R.menu.menu_more2, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+
+        MenuItem searchItem = menu.findItem(R.id.act_search);
+
+        //super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        int cas=item.getItemId();
-        if (cas== R.id.act_logout){
+        int id = item.getItemId();
+        if (id == R.id.act_settings) {
+            Toast.makeText(getContext(), "Settings Pressed", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+
+        if (id == R.id.act_search) {
+            startActivity(new Intent(getActivity(), PostCarSearch.class));
+            //Toast.makeText(getContext(), "Settings Pressed", Toast.LENGTH_SHORT).show();
+            return true;
         }
 
         return super.onOptionsItemSelected(item);

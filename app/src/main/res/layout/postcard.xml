@@ -25,14 +25,25 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <ImageView
+                    <!--<ImageView
                         android:layout_width="match_parent"
                         android:layout_height="200dp"
                         android:scaleType="centerCrop"
                         android:padding="4dp"
                         android:layout_marginTop="4dp"
                         android:background="@drawable/part_round"
-                        android:id="@+id/disp_imgs"/>
+                        android:id="@+id/disp_imgs"/>-->
+
+                    <android.support.v4.view.ViewPager
+                        xmlns:android="http://schemas.android.com/apk/res/android"
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        xmlns:tools="http://schemas.android.com/tools"
+                        android:id="@+id/view_pager"
+                        android:background="#d4d4d1"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp">
+
+                    </android.support.v4.view.ViewPager>
 
                     <LinearLayout
                         android:orientation="vertical"
@@ -320,15 +331,20 @@
 
                 </LinearLayout>
 
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/postedit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_gravity="bottom|end"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="16dp"
+                    app:srcCompat="@drawable/ic_postedit" />
+
 
             </RelativeLayout>
-
-
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/postedit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
 
         </RelativeLayout>
 
