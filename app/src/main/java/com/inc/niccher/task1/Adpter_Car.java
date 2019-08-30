@@ -89,9 +89,4 @@ public class Adpter_Car extends RecyclerView.Adapter<Adpter_Car.Shika>{
             viu_PosDetail = itemView.findViewById(R.id.disp_post);
         }
     }
-
-    /*@Override
-    public int getItemViewType(int position) {
-        return super.getItemViewType(position);
-    }*/
 }

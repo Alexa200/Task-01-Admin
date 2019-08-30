@@ -219,6 +219,10 @@ public class Casa extends AppCompatActivity implements NavigationView.OnNavigati
                 startActivity(new Intent(Casa.this, Act_myProfile.class));
                 //Toast.makeText(this, "This Activity under active progress", Toast.LENGTH_SHORT).show();
                 break;
+            }case R.id.nav_settings:{
+                startActivity(new Intent(Casa.this, PostCarSearch.class));
+                //Toast.makeText(this, "This Activity under active progress", Toast.LENGTH_SHORT).show();
+                break;
             }case R.id.nav_logout: {
                 Intent it = new Intent(Casa.this,Login.class);
                 startActivity(it);

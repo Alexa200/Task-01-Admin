@@ -91,7 +91,10 @@ public class PostCarD extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(PostCarD.this, "Hhe", Toast.LENGTH_SHORT).show();
+                finish();
+                Intent ed=new Intent(PostCarD.this,Car_Edit.class);
+                ed.putExtra("PostEditCode",pat);
+                startActivity(ed);
             }
         });
 

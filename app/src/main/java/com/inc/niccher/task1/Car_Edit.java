@@ -1,22 +1,15 @@
 package com.inc.niccher.task1;
 
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.INotificationSideChannel;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -28,14 +21,16 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
-import com.google.gson.internal.Primitives;
 import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
@@ -45,18 +40,21 @@ import java.util.Calendar;
 import java.util.HashMap;
 
 
-public class Add_Car extends AppCompatActivity {
+public class Car_Edit extends AppCompatActivity {
 
     private Spinner vmaker,vbody,vmodel,vyear,vmileage,vcondi,vng,vcolo,vtrans,vint,vfuel;
     private EditText bigdesc;
     private Button btnSubmit,btnupload;
     private int coun=0;
-    private String uploadId ;
     private ProgressDialog pds;
 
     private ImageView imgsel;
 
     ProgressDialog pds2;
+
+    Intent targ=null;
+
+    String EditID;
 
     Uri uri_image;
 
@@ -75,7 +73,7 @@ public class Add_Car extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_car);
 
-        getSupportActionBar().setTitle("Add A vehicle");
+        getSupportActionBar().setTitle("Edit vehicle");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
@@ -87,10 +85,16 @@ public class Add_Car extends AppCompatActivity {
 
         mStorageRef = FirebaseStorage.getInstance().getReference("VehicleImgs");
 
-        dref = FirebaseDatabase.getInstance().getReference("Posteds").child(userf.getUid());
+        targ=getIntent();
 
-        uploadId= dref.push().getKey();
-        Log.e("Ids ", "dref.push().getKey()  "+uploadId );
+        if (targ.getStringExtra("PostEditCode")==null){
+            finish();
+            Intent hom=new Intent(Car_Edit.this,Casa.class);
+            hom.putExtra("PostUUIDCode","Posts");
+            startActivity(hom);
+        }else {
+            EditID=targ.getStringExtra("PostEditCode");
+        }
 
         pds2=new ProgressDialog(this);
 
@@ -153,7 +157,7 @@ public class Add_Car extends AppCompatActivity {
                     .setBorderCornerColor(Color.BLUE)
                     .setGuidelinesColor(Color.GREEN)
                     .setBorderLineThickness(2)
-                    .start(Add_Car.this);
+                    .start(Car_Edit.this);
             }
         });
 
@@ -161,13 +165,15 @@ public class Add_Car extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (mUploadTask != null && mUploadTask.isInProgress()) {
-                    Toast.makeText(Add_Car.this, "Upload in progress", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Car_Edit.this, "Upload in progress", Toast.LENGTH_SHORT).show();
                 } else {
                     uploadFile();
                     //Toast.makeText(MainActivity.this, mPostBody.getText().toString().trim(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
+
+        Update();
 
     }
 
@@ -193,14 +199,7 @@ public class Add_Car extends AppCompatActivity {
         pds.setMessage("Uploading Info");
         pds.show();
 
-        Calendar cal= Calendar.getInstance();
-        SimpleDateFormat ctime=new SimpleDateFormat("HH:mm");
-        SimpleDateFormat cdate=new SimpleDateFormat("dd-MMMM-yyyy");
-
-        final String ctim=ctime.format(cal.getTime());
-        final String cdat=cdate.format(cal.getTime());
-
-        DatabaseReference mDatabaseRef= FirebaseDatabase.getInstance().getReference("Posteds").child(userf.getUid()).child("Vehicles");//.push();
+        DatabaseReference mDatabaseRef= FirebaseDatabase.getInstance().getReference("Posteds/"+userf.getUid()+"/Vehicles/"+EditID);//.push();
 
         HashMap<String , Object> hasm2=new HashMap<String, Object>();
 
@@ -216,15 +215,13 @@ public class Add_Car extends AppCompatActivity {
         hasm2.put("cInterior" ,String.valueOf(vint.getSelectedItem()));
         hasm2.put("cFuel" ,String.valueOf(vfuel.getSelectedItem()));
         hasm2.put("cDesc",bigdesc.getText().toString());
-        hasm2.put("cKey",uploadId);
-        hasm2.put("cTime","On "+cdat+" At "+ctim);
 
-        mDatabaseRef.child(uploadId).updateChildren(hasm2).addOnSuccessListener(new OnSuccessListener<Void>() {
+        mDatabaseRef.updateChildren(hasm2).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
 
                 pds.dismiss();
-                Intent carimg=new Intent(Add_Car.this, Casa.class);
+                Intent carimg=new Intent(Car_Edit.this, Casa.class);
                 carimg.putExtra("PostUUIDCode","Posts");
                 startActivity(carimg);
             }
@@ -232,7 +229,7 @@ public class Add_Car extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Exception e) {
                 pds.dismiss();
-                Toast.makeText(Add_Car.this, "Add car addOnFailureListener\n"+e.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(Car_Edit.this, "Add car addOnFailureListener\n"+e.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -255,7 +252,7 @@ public class Add_Car extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(Uri uri) {
 
-                                    drefup=FirebaseDatabase.getInstance().getReference("Posteds/"+userf.getUid()+"/Vehicles/"+uploadId);
+                                    drefup=FirebaseDatabase.getInstance().getReference("Posteds/"+userf.getUid()+"/Vehicles/"+EditID);
 
                                     HashMap<String , Object> hasm3=new HashMap<String, Object>();
 
@@ -272,7 +269,7 @@ public class Add_Car extends AppCompatActivity {
                                         @Override
                                         public void onFailure(@NonNull Exception e) {
                                             pds.dismiss();
-                                            Toast.makeText(Add_Car.this, "Add Image URL addOnFailureListener\n"+e.getMessage(), Toast.LENGTH_LONG).show();
+                                            Toast.makeText(Car_Edit.this, "Add Image URL addOnFailureListener\n"+e.getMessage(), Toast.LENGTH_LONG).show();
                                         }
                                     });
 
@@ -280,7 +277,7 @@ public class Add_Car extends AppCompatActivity {
                                     Picasso.get().load(R.drawable.ic_addcimg).placeholder(R.drawable.ic_addcimg).into(imgsel);
                                     pds2.dismiss();
 
-                                    Toast.makeText(Add_Car.this, "Upload Succesfull", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(Car_Edit.this, "Upload Succesfull", Toast.LENGTH_SHORT).show();
 
                                 }
                             });
@@ -290,7 +287,7 @@ public class Add_Car extends AppCompatActivity {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             pds2.dismiss();
-                            Toast.makeText(Add_Car.this, "Upload task addOnFailureListener\n"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Car_Edit.this, "Upload task addOnFailureListener\n"+e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     })
                     .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
@@ -306,12 +303,64 @@ public class Add_Car extends AppCompatActivity {
         }
     }
 
+    private void Update() {
+        pds.setMessage("Loading Info");
+        pds.show();
+
+        DatabaseReference mDatabaseRef= FirebaseDatabase.getInstance().getReference("Posteds/"+userf.getUid()+"/Vehicles/"+EditID);//.push();
+
+        mDatabaseRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                vmaker.setSelection(getIndex(vmaker, (String) dataSnapshot.child("cMaker").getValue()));
+                vbody.setSelection(getIndex(vbody, (String) dataSnapshot.child("cBody").getValue()));
+                vmodel.setSelection(getIndex(vmodel, (String) dataSnapshot.child("cModel").getValue()));
+                vyear.setSelection(getIndex(vyear, (String) dataSnapshot.child("cYear").getValue()));
+                vmileage.setSelection(getIndex(vmileage, (String) dataSnapshot.child("cMileage").getValue()));
+                vcondi.setSelection(getIndex(vcondi, (String) dataSnapshot.child("cCondition").getValue()));
+                vng.setSelection(getIndex(vng, (String) dataSnapshot.child("cEngine").getValue()));
+                vcolo.setSelection(getIndex(vcolo, (String) dataSnapshot.child("cColor").getValue()));
+                vtrans.setSelection(getIndex(vtrans, (String) dataSnapshot.child("cTransmision").getValue()));
+                vfuel.setSelection(getIndex(vfuel, (String) dataSnapshot.child("cFuel").getValue()));
+                vint.setSelection(getIndex(vint, (String) dataSnapshot.child("cInterior").getValue()));
+
+                bigdesc.setText((String) dataSnapshot.child("cDesc").getValue());
+
+                try {
+                    Picasso.get().load((String) dataSnapshot.child("cImg0").getValue()).into(imgsel);
+
+                }catch (Exception ex){
+                    Picasso.get().load(R.drawable.ic_defuser).into(imgsel);
+                    Toast.makeText(Car_Edit.this, "Picasso.get() Error"+ex, Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        pds.dismiss();
+    }
+
+    private int getIndex(Spinner spinner, String myString){
+        for (int i=0;i<spinner.getCount();i++){
+            if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(myString)){
+                return i;
+            }
+        }
+
+        return 0;
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int idd=item.getItemId();
         if (idd==android.R.id.home){
             finish();
-            startActivity(new Intent(Add_Car.this,Casa.class));
+            startActivity(new Intent(Car_Edit.this,Casa.class));
         }
         return super.onOptionsItemSelected(item);
     }

@@ -55,6 +55,7 @@
 
             <LinearLayout
                 android:id="@+id/laymodel"
+                android:visibility="gone"
                 android:layout_below="@+id/laybody"
                 android:layout_marginTop="15dp"
                 android:layout_width="match_parent"
@@ -116,7 +117,7 @@
                         android:textSize="16dp"/>
 
                     <Spinner
-                        android:id="@+id/cbodtype"
+                        android:id="@+id/cbody"
                         android:layout_width="0dp"
                         android:gravity="end"
                         android:layout_weight="1"
