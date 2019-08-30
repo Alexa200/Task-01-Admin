@@ -163,7 +163,8 @@ public class Adpter_Car extends RecyclerView.Adapter<Adpter_Car.Shika>{
         pgd.setMessage("Deleting Post");
         pgd.show();
         try {
-            dref1= FirebaseDatabase.getInstance().getReference("Posteds/"+userf.getUid()+"/Vehicles/"+Postid);
+            //dref1= FirebaseDatabase.getInstance().getReference("Posteds/"+userf.getUid()+"/Vehicles/"+Postid);
+            dref1= FirebaseDatabase.getInstance().getReference("Posteds/Vehicles/"+Postid);
 
             dref1.addValueEventListener(new ValueEventListener() {
                 @Override

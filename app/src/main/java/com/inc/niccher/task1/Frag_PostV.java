@@ -91,7 +91,8 @@ public class Frag_PostV extends Fragment {
     }
 
     private void FetcpostV() {
-        DatabaseReference dref3 = FirebaseDatabase.getInstance().getReference("Posteds/"+userf.getUid()+"/Vehicles");
+        //"+userf.getUid()+"
+        DatabaseReference dref3 = FirebaseDatabase.getInstance().getReference("Posteds/Vehicles");
         dref3.keepSynced(true);
 
         dref3.addValueEventListener(new ValueEventListener() {

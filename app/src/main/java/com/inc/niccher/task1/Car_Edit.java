@@ -66,8 +66,6 @@ public class Car_Edit extends AppCompatActivity {
     private StorageReference mStorageRef;
     private StorageTask mUploadTask;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -199,7 +197,8 @@ public class Car_Edit extends AppCompatActivity {
         pds.setMessage("Uploading Info");
         pds.show();
 
-        DatabaseReference mDatabaseRef= FirebaseDatabase.getInstance().getReference("Posteds/"+userf.getUid()+"/Vehicles/"+EditID);//.push();
+        //DatabaseReference mDatabaseRef= FirebaseDatabase.getInstance().getReference("Posteds/"+userf.getUid()+"/Vehicles/"+EditID);//.push();
+        DatabaseReference mDatabaseRef= FirebaseDatabase.getInstance().getReference("Posteds/Vehicles/"+EditID);//.push();
 
         HashMap<String , Object> hasm2=new HashMap<String, Object>();
 
@@ -252,7 +251,8 @@ public class Car_Edit extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(Uri uri) {
 
-                                    drefup=FirebaseDatabase.getInstance().getReference("Posteds/"+userf.getUid()+"/Vehicles/"+EditID);
+                                    //drefup=FirebaseDatabase.getInstance().getReference("Posteds/"+userf.getUid()+"/Vehicles/"+EditID);
+                                    drefup=FirebaseDatabase.getInstance().getReference("Posteds/Vehicles/"+EditID);
 
                                     HashMap<String , Object> hasm3=new HashMap<String, Object>();
 
@@ -307,7 +307,7 @@ public class Car_Edit extends AppCompatActivity {
         pds.setMessage("Loading Info");
         pds.show();
 
-        DatabaseReference mDatabaseRef= FirebaseDatabase.getInstance().getReference("Posteds/"+userf.getUid()+"/Vehicles/"+EditID);//.push();
+        DatabaseReference mDatabaseRef= FirebaseDatabase.getInstance().getReference("Posteds/Vehicles/"+EditID);//.push();
 
         mDatabaseRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -351,7 +351,6 @@ public class Car_Edit extends AppCompatActivity {
                 return i;
             }
         }
-
         return 0;
     }
 

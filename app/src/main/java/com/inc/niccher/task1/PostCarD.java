@@ -119,7 +119,7 @@ public class PostCarD extends AppCompatActivity {
     }
 
     private void LoadPost(){
-        DatabaseReference dref3 = FirebaseDatabase.getInstance().getReference("Posteds/"+userf.getUid()+"/Vehicles/"+pat);
+        DatabaseReference dref3 = FirebaseDatabase.getInstance().getReference("Posteds/Vehicles/"+pat);
         dref3.keepSynced(true);
         try {
             dref3.addValueEventListener(new ValueEventListener() {
@@ -160,7 +160,7 @@ public class PostCarD extends AppCompatActivity {
     }
 
     private void Counta(){
-        DatabaseReference dref3 = FirebaseDatabase.getInstance().getReference("Posteds/"+userf.getUid()+"/Vehicles/"+pat);
+        DatabaseReference dref3 = FirebaseDatabase.getInstance().getReference("Posteds/Vehicles/"+pat);
         dref3.keepSynced(true);
 
         dref3.addValueEventListener(new ValueEventListener() {

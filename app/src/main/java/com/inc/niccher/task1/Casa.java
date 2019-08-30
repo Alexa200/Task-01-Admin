@@ -224,6 +224,8 @@ public class Casa extends AppCompatActivity implements NavigationView.OnNavigati
                 //Toast.makeText(this, "This Activity under active progress", Toast.LENGTH_SHORT).show();
                 break;
             }case R.id.nav_logout: {
+                mAuth.signOut();
+
                 Intent it = new Intent(Casa.this,Login.class);
                 startActivity(it);
                 finish();
