@@ -331,7 +331,7 @@
 
                 </LinearLayout>
 
-                <android.support.design.widget.FloatingActionButton
+                <!--<android.support.design.widget.FloatingActionButton
                     android:id="@+id/postedit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -341,7 +341,7 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginBottom="16dp"
-                    app:srcCompat="@drawable/ic_postedit" />
+                    app:srcCompat="@drawable/ic_postedit" />-->
 
 
             </RelativeLayout>

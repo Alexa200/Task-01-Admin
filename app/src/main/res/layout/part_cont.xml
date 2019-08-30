@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="200dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="#eaeaea"
+    android:id="@+id/disp_post">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:background="@drawable/part_edit"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/cnt_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="View Post"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:drawableRight="@drawable/ic_view"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#565656" />
+
+        <Button
+            android:id="@+id/cnt_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="Edit Post"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:drawableRight="@drawable/ic_edit"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#565656" />
+
+        <Button
+            android:id="@+id/cnt_delete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="Delete Post"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:drawableRight="@drawable/ic_delete"/>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

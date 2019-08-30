@@ -200,7 +200,7 @@ public class Add_Car extends AppCompatActivity {
         final String ctim=ctime.format(cal.getTime());
         final String cdat=cdate.format(cal.getTime());
 
-        DatabaseReference mDatabaseRef= FirebaseDatabase.getInstance().getReference("Posteds").child(userf.getUid()).child("Vehicles");//.push();
+        DatabaseReference mDatabaseRef= FirebaseDatabase.getInstance().getReference("Posteds/"+(userf.getUid()+"/Vehicles"));//.push();
 
         HashMap<String , Object> hasm2=new HashMap<String, Object>();
 
@@ -217,6 +217,7 @@ public class Add_Car extends AppCompatActivity {
         hasm2.put("cFuel" ,String.valueOf(vfuel.getSelectedItem()));
         hasm2.put("cDesc",bigdesc.getText().toString());
         hasm2.put("cKey",uploadId);
+        hasm2.put("cOwner",userf.getUid());
         hasm2.put("cTime","On "+cdat+" At "+ctim);
 
         mDatabaseRef.child(uploadId).updateChildren(hasm2).addOnSuccessListener(new OnSuccessListener<Void>() {

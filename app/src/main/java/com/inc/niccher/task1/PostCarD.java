@@ -86,7 +86,7 @@ public class PostCarD extends AppCompatActivity {
             pat=getta.getStringExtra("PostUUIDCode");
         }
 
-        fab=findViewById(R.id.postedit);
+        /*fab=findViewById(R.id.postedit);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,7 +96,7 @@ public class PostCarD extends AppCompatActivity {
                 ed.putExtra("PostEditCode",pat);
                 startActivity(ed);
             }
-        });
+        });*/
 
         vMaker=findViewById(R.id.disp_maker);
         vBody=findViewById(R.id.disp_body);

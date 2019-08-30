@@ -124,29 +124,26 @@ public class Frag_PostV extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
-    @Override
+    /*@Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         //inflater = getActivity().getMenuInflater();
-        inflater.inflate(R.menu.menu_more2, menu);
+        inflater.inflate(R.menu.menu_more, menu);
         super.onCreateOptionsMenu(menu, inflater);
-
-        MenuItem searchItem = menu.findItem(R.id.act_search);
-
         //super.onCreateOptionsMenu(menu, inflater);
-    }
+    }*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
         int id = item.getItemId();
         if (id == R.id.act_settings) {
-            Toast.makeText(getContext(), "Settings Pressed", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Activity Under Active Development", Toast.LENGTH_SHORT).show();
             return true;
         }
 
         if (id == R.id.act_search) {
-            startActivity(new Intent(getActivity(), PostCarSearch.class));
-            //Toast.makeText(getContext(), "Settings Pressed", Toast.LENGTH_SHORT).show();
+            //startActivity(new Intent(getActivity(), PostCarSearch.class));
+            Toast.makeText(getContext(), "Settings Pressed", Toast.LENGTH_SHORT).show();
             return true;
         }
 
