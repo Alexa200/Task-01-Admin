@@ -149,10 +149,20 @@
         <item>2900 cc</item>
         <item>3000 cc</item>
     </string-array>
-    <string name="title_activity_main2">Main2Activity</string>
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="Vregion_prompt">Region</string>
+
+    <string-array name="Vregion_arrays">
+        <item>Location</item>
+        <item>Nairobi</item>
+        <item>Central</item>
+        <item>Eastern</item>
+        <item>Rift Valley</item>
+        <item>Coast</item>
+        <item>Nyanza</item>
+        <item>Western</item>
+        <item>North Eastern</item>
+    </string-array>
 
     <string name="action_settings">Settings</string>
 </resources>

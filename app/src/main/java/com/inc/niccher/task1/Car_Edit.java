@@ -42,8 +42,8 @@ import java.util.HashMap;
 
 public class Car_Edit extends AppCompatActivity {
 
-    private Spinner vmaker,vbody,vmodel,vyear,vmileage,vcondi,vng,vcolo,vtrans,vint,vfuel;
-    private EditText bigdesc;
+    private Spinner vmaker,vbody,vmodel,vyear,vmileage,vcondi,vng,vcolo,vtrans,vint,vfuel,vregion;
+    private EditText bigdesc,bigprice;
     private Button btnSubmit,btnupload;
     private int coun=0;
     private ProgressDialog pds;
@@ -130,7 +130,11 @@ public class Car_Edit extends AppCompatActivity {
         vfuel = (Spinner) findViewById(R.id.cfuel);
         vfuel.setOnItemSelectedListener(new CarMakerListing());
 
+        vregion = (Spinner) findViewById(R.id.cregion);
+        vregion.setOnItemSelectedListener(new CarMakerListing());
+
         bigdesc =  findViewById(R.id.cdesc);
+        bigprice =  findViewById(R.id.cprice);
 
         imgsel = findViewById(R.id.com_imagesel);
         btnupload = findViewById(R.id.upload);
@@ -215,11 +219,15 @@ public class Car_Edit extends AppCompatActivity {
         hasm2.put("cFuel" ,String.valueOf(vfuel.getSelectedItem()));
         hasm2.put("cDesc",bigdesc.getText().toString());
 
+        hasm2.put("cRegion" ,String.valueOf(vregion.getSelectedItem()));
+        hasm2.put("cPrice",bigprice.getText().toString());
+
         mDatabaseRef.updateChildren(hasm2).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
 
                 pds.dismiss();
+                finish();
                 Intent carimg=new Intent(Car_Edit.this, Casa.class);
                 carimg.putExtra("PostUUIDCode","Posts");
                 startActivity(carimg);
@@ -324,8 +332,10 @@ public class Car_Edit extends AppCompatActivity {
                 vtrans.setSelection(getIndex(vtrans, (String) dataSnapshot.child("cTransmision").getValue()));
                 vfuel.setSelection(getIndex(vfuel, (String) dataSnapshot.child("cFuel").getValue()));
                 vint.setSelection(getIndex(vint, (String) dataSnapshot.child("cInterior").getValue()));
+                vregion.setSelection(getIndex(vint, (String) dataSnapshot.child("cRegion").getValue()));
 
                 bigdesc.setText((String) dataSnapshot.child("cDesc").getValue());
+                bigprice.setText((String) dataSnapshot.child("cPrice").getValue());
 
                 try {
                     Picasso.get().load((String) dataSnapshot.child("cImg0").getValue()).into(imgsel);

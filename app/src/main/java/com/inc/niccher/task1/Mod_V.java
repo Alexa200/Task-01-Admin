@@ -6,12 +6,12 @@ package com.inc.niccher.task1;
 
 class Mod_V {
     //Maker,Body,Model,Year,Mileage,Condition,Engine,Color,Transmision,Interior,Fuel,Desc,Key,Time;
-    String cMaker,cBody,cModel,cYear,cMileage,cCondition,cEngine,cColor,cTransmision,cInterior,cFuel,cDesc,cKey,cTime,cImg0;
+    String cMaker,cBody,cModel,cYear,cMileage,cCondition,cEngine,cColor,cTransmision,cInterior,cFuel,cDesc,cKey,cTime,cPrice,cRegion,cImg0;
 
     public Mod_V() {
     }
 
-    public Mod_V(String cMaker, String cBody, String cModel, String cYear, String cMileage, String cCondition, String cEngine, String cColor, String cTransmision, String cInterior, String cFuel, String cDesc, String cKey, String cTime, String cImg0) {
+    public Mod_V(String cMaker, String cBody, String cModel, String cYear, String cMileage, String cCondition, String cEngine, String cColor, String cTransmision, String cInterior, String cFuel, String cDesc, String cKey, String cTime, String cPrice, String cRegion, String cImg0) {
         this.cMaker = cMaker;
         this.cBody = cBody;
         this.cModel = cModel;
@@ -26,6 +26,8 @@ class Mod_V {
         this.cDesc = cDesc;
         this.cKey = cKey;
         this.cTime = cTime;
+        this.cPrice = cPrice;
+        this.cRegion = cRegion;
         this.cImg0 = cImg0;
     }
 
@@ -139,6 +141,22 @@ class Mod_V {
 
     public void setcTime(String cTime) {
         this.cTime = cTime;
+    }
+
+    public String getcPrice() {
+        return cPrice;
+    }
+
+    public void setcPrice(String cPrice) {
+        this.cPrice = cPrice;
+    }
+
+    public String getcRegion() {
+        return cRegion;
+    }
+
+    public void setcRegion(String cRegion) {
+        this.cRegion = cRegion;
     }
 
     public String getcImg0() {

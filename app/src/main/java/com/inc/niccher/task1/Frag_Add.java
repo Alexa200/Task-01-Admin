@@ -48,7 +48,7 @@ public class Frag_Add extends Fragment {
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();*/
 
-                startActivity(new Intent(getActivity(), Add_Estate.class));
+                startActivity(new Intent(getActivity(), Add_Car.class));
             }
         });
 

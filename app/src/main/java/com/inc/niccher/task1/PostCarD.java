@@ -40,7 +40,7 @@ public class PostCarD extends AppCompatActivity {
     ImageView vImg0;
     ViewPager viewP;
 
-    TextView vMaker,vBody,vModel,vYear,vMileage,vvondition,vEngine,vvolor,vTransmision,vInterior,vFuel,vDesv,vKey,vTime;
+    TextView vMaker,vBody,vModel,vYear,vMileage,vvondition,vEngine,vvolor,vTransmision,vInterior,vFuel,vDesv,vKey,vTime,vPrice,vRegion;
 
     ProgressDialog pds2;
 
@@ -86,7 +86,7 @@ public class PostCarD extends AppCompatActivity {
             pat=getta.getStringExtra("PostUUIDCode");
         }
 
-        /*fab=findViewById(R.id.postedit);
+        fab=findViewById(R.id.postedit);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,7 +96,7 @@ public class PostCarD extends AppCompatActivity {
                 ed.putExtra("PostEditCode",pat);
                 startActivity(ed);
             }
-        });*/
+        });
 
         vMaker=findViewById(R.id.disp_maker);
         vBody=findViewById(R.id.disp_body);
@@ -110,6 +110,8 @@ public class PostCarD extends AppCompatActivity {
         vFuel=findViewById(R.id.disp_fuel);
         vDesv=findViewById(R.id.disp_desc);
         vTime=findViewById(R.id.disp_time);
+        vRegion=findViewById(R.id.disp_region);
+        vPrice=findViewById(R.id.disp_price);
 
         //vImg0=findViewById(R.id.disp_imgs);
 
@@ -138,6 +140,8 @@ public class PostCarD extends AppCompatActivity {
                     vFuel.setText((String) dataSnapshot.child("cFuel").getValue());
                     vDesv.setText((String) dataSnapshot.child("cDesc").getValue());
                     vTime.setText((String) dataSnapshot.child("cTime").getValue());
+                    vRegion.setText((String) dataSnapshot.child("cRegion").getValue());
+                    vPrice.setText((String) dataSnapshot.child("cPrice").getValue());
 
                     try {
                         //Picasso.get().load((String) dataSnapshot.child("cImg0").getValue()).into(vImg0);

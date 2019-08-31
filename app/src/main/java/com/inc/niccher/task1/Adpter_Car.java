@@ -58,45 +58,17 @@ public class Adpter_Car extends RecyclerView.Adapter<Adpter_Car.Shika>{
 
         fusa= FirebaseAuth.getInstance().getCurrentUser();
 
-        final Shika shikapoint=new Shika(infla);
-
         conf=new Dialog(cnt);
         conf.setContentView(R.layout.part_cont);
 
-        viupos=conf.findViewById(R.id.cnt_view);
-        edpos=conf.findViewById(R.id.cnt_edit);
+        //viupos=conf.findViewById(R.id.cnt_view);
+        //edpos=conf.findViewById(R.id.cnt_edit);
         delpos=conf.findViewById(R.id.cnt_delete);
 
         mAuth= FirebaseAuth.getInstance();
         userf=mAuth.getCurrentUser();
 
-        /*Button edpos=conf.findViewById(R.id.cnt_edit);
-        Button delpos=conf.findViewById(R.id.cnt_delete);
-
-        /*edpos.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(cnt, "Clicked Edit "+shikapoint.getAdapterPosition(), Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        delpos.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(cnt, "Clicked Delete "+shikapoint.getAdapterPosition(), Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        shikapoint.viu_PosDetail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(cnt, "Post ID "+shikapoint.getAdapterPosition()+"\nPost ID"+Postid, Toast.LENGTH_SHORT).show();
-                conf.show();
-            }
-        });*/
-
-        //return new Shika(infla);
-        return shikapoint;
+        return new Shika(infla);
     }
 
     @Override
@@ -107,26 +79,17 @@ public class Adpter_Car extends RecyclerView.Adapter<Adpter_Car.Shika>{
         holder.viu_Bod.setText(kar.getcBody());
         holder.viu_Mak.setText(kar.getcMaker());
         holder.viu_Conditio.setText(kar.getcCondition());
-        holder.viu_Pric.setText(kar.getcEngine());
-        holder.viu_Mile.setText(kar.getcMileage());
-
-        Postid=kar.getcKey();
+        holder.viu_Pric.setText(kar.getcPrice());
+        holder.viu_region.setText(kar.getcRegion());
 
         Picasso.get().load(kar.cImg0).into(holder.viu_carimg);
 
-        holder.viu_PosDetail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                conf.show();
-            }
-        });
-
-        edpos.setOnClickListener(new View.OnClickListener() {
+        /*edpos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 conf.dismiss();
                 Intent posd=new Intent(cnt, Car_Edit.class);
-                posd.putExtra("PostEditCode",kar.getcKey());
+                posd.putExtra("PostEditCode",(String)kar.getcKey());
                 cnt.startActivity(new Intent(posd));
             }
         });
@@ -136,35 +99,46 @@ public class Adpter_Car extends RecyclerView.Adapter<Adpter_Car.Shika>{
             public void onClick(View view) {
                 conf.dismiss();
                 Intent posd=new Intent(cnt, PostCarD.class);
-                posd.putExtra("PostUUIDCode",kar.getcKey());
+                posd.putExtra("PostUUIDCode",(String) kar.getcKey());
                 cnt.startActivity(new Intent(posd));
             }
-        });
+        });*/
 
         delpos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 conf.dismiss();
-                DelPost();
+                Toast.makeText(cnt, "Delete id "+(String) kar.getcKey(), Toast.LENGTH_LONG).show();
+                Log.e("Delete id ", "onClick: "+(String) kar.getcKey() );
+                //DelPost( (String) kar.getcKey());
             }
         });
-        /*holder.viu_PosDetail.setOnClickListener(new View.OnClickListener() {
+
+        holder.viu_PosDetail.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                conf.show();
+                return false;
+            }
+        });
+
+        holder.viu_PosDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent posd=new Intent(cnt, PostCarD.class);
-                posd.putExtra("PostUUIDCode",kar.getcKey());
+                posd.putExtra("PostUUIDCode",(String) kar.getcKey());
                 cnt.startActivity(new Intent(posd));
             }
-        });*/
+        });
     }
 
-    private void DelPost() {
+    private void DelPost(String Ki) {
         final ProgressDialog pgd=new ProgressDialog(cnt);
         pgd.setMessage("Deleting Post");
         pgd.show();
         try {
             //dref1= FirebaseDatabase.getInstance().getReference("Posteds/"+userf.getUid()+"/Vehicles/"+Postid);
-            dref1= FirebaseDatabase.getInstance().getReference("Posteds/Vehicles/"+Postid);
+            dref1= FirebaseDatabase.getInstance().getReference("Posteds/Vehicles/"+Ki);
 
             dref1.addValueEventListener(new ValueEventListener() {
                 @Override
@@ -194,7 +168,7 @@ public class Adpter_Car extends RecyclerView.Adapter<Adpter_Car.Shika>{
 
     class Shika extends RecyclerView.ViewHolder {
 
-        public TextView viu_Mak,viu_Bod,viu_Conditio,viu_Pric,viu_Mile;
+        public TextView viu_Mak,viu_Bod,viu_Conditio,viu_Pric,viu_region;
         public ImageView viu_carimg;
         RelativeLayout viu_PosDetail;
 
@@ -205,7 +179,7 @@ public class Adpter_Car extends RecyclerView.Adapter<Adpter_Car.Shika>{
             viu_Bod = itemView.findViewById(R.id.disp_body);
             viu_Conditio = itemView.findViewById(R.id.disp_condition);
             viu_Pric = itemView.findViewById(R.id.disp_price);
-            viu_Mile = itemView.findViewById(R.id.disp_mileage);
+            viu_region = itemView.findViewById(R.id.disp_region);
 
             viu_carimg = itemView.findViewById(R.id.disp_imgs);
             viu_PosDetail = itemView.findViewById(R.id.disp_post);

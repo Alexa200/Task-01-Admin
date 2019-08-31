@@ -47,8 +47,8 @@ import java.util.HashMap;
 
 public class Add_Car extends AppCompatActivity {
 
-    private Spinner vmaker,vbody,vmodel,vyear,vmileage,vcondi,vng,vcolo,vtrans,vint,vfuel;
-    private EditText bigdesc;
+    private Spinner vmaker,vbody,vmodel,vyear,vmileage,vcondi,vng,vcolo,vtrans,vint,vfuel,vregion;
+    private EditText bigdesc,bigprice;
     private Button btnSubmit,btnupload;
     private int coun=0;
     private String uploadId ;
@@ -128,7 +128,11 @@ public class Add_Car extends AppCompatActivity {
         vfuel = (Spinner) findViewById(R.id.cfuel);
         vfuel.setOnItemSelectedListener(new CarMakerListing());
 
+        vregion = (Spinner) findViewById(R.id.cregion);
+        vregion.setOnItemSelectedListener(new CarMakerListing());
+
         bigdesc =  findViewById(R.id.cdesc);
+        bigprice =  findViewById(R.id.cprice);
 
         imgsel = findViewById(R.id.com_imagesel);
         btnupload = findViewById(R.id.upload);
@@ -217,6 +221,8 @@ public class Add_Car extends AppCompatActivity {
         hasm2.put("cInterior" ,String.valueOf(vint.getSelectedItem()));
         hasm2.put("cFuel" ,String.valueOf(vfuel.getSelectedItem()));
         hasm2.put("cDesc",bigdesc.getText().toString());
+        hasm2.put("cRegion" ,String.valueOf(vregion.getSelectedItem()));
+        hasm2.put("cPrice",bigprice.getText().toString());
         hasm2.put("cKey",uploadId);
         hasm2.put("cOwner",userf.getUid());
         hasm2.put("cTime","On "+cdat+" At "+ctim);
@@ -226,6 +232,7 @@ public class Add_Car extends AppCompatActivity {
             public void onSuccess(Void aVoid) {
 
                 pds.dismiss();
+                finish();
                 Intent carimg=new Intent(Add_Car.this, Casa.class);
                 carimg.putExtra("PostUUIDCode","Posts");
                 startActivity(carimg);

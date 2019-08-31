@@ -312,6 +312,52 @@
                             <TextView
                                 android:layout_width="120dp"
                                 android:layout_height="wrap_content"
+                                android:text="Price"
+                                android:textStyle="bold"
+                                android:textSize="18sp"/>
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:text="Answer Here"
+                                android:id="@+id/disp_price"
+                                android:textStyle="bold"
+                                android:textSize="16sp"
+                                android:layout_weight="1"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="120dp"
+                                android:layout_height="wrap_content"
+                                android:text="Region"
+                                android:textStyle="bold"
+                                android:textSize="18sp"/>
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:text="Answer Here"
+                                android:id="@+id/disp_region"
+                                android:textStyle="bold"
+                                android:textSize="16sp"
+                                android:layout_weight="1"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="120dp"
+                                android:layout_height="wrap_content"
                                 android:text="Posted"
                                 android:textStyle="bold"
                                 android:textSize="18sp"/>
@@ -331,17 +377,18 @@
 
                 </LinearLayout>
 
-                <!--<android.support.design.widget.FloatingActionButton
+                <android.support.design.widget.FloatingActionButton
                     android:id="@+id/postedit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentEnd="true"
                     android:layout_gravity="bottom|end"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
-                    android:layout_marginBottom="16dp"
-                    app:srcCompat="@drawable/ic_postedit" />-->
+                    app:backgroundTint="#999999"
+                    app:srcCompat="@drawable/ic_postedit"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="16dp" />
 
 
             </RelativeLayout>

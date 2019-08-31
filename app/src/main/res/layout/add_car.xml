@@ -426,7 +426,7 @@
 
             </LinearLayout>
 
-            <!----><LinearLayout
+            <LinearLayout
                 android:id="@+id/layfuel"
                 android:layout_below="@+id/layinte"
                 android:layout_marginTop="15dp"
@@ -465,12 +465,53 @@
                     android:layout_height="1dp"
                     android:background="#f71b03" />
 
-            </LinearLayout><!---->
+            </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layreg"
+            android:layout_below="@+id/layfuel"
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Region / Location"
+                    android:layout_weight="1"
+                    android:padding="16dp"
+                    android:textSize="16dp"/>
+
+                <Spinner
+                    android:id="@+id/cregion"
+                    android:layout_width="0dp"
+                    android:gravity="end"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/Vregion_arrays"
+                    android:prompt="@string/Vregion_prompt" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_height="1dp"
+                android:background="#f71b03" />
+
+        </LinearLayout>
 
             <EditText
                 android:id="@+id/cdesc"
-                android:hint="Location,General Description"
-                android:layout_below="@+id/layfuel"
+                android:hint="General Description"
+                android:layout_below="@+id/layreg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
@@ -481,6 +522,20 @@
                 android:layout_marginRight="20dp"
                 android:inputType="textMultiLine" />
 
+            <EditText
+                android:id="@+id/cprice"
+                android:hint="Estimated Price"
+                android:layout_below="@+id/cdesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="16dp"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:inputType="number" />
+
 
             <ImageView
                 android:layout_marginTop="20dp"
@@ -488,7 +543,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0250dp"
                 android:layout_centerHorizontal="true"
-                android:layout_below="@id/cdesc"
+                android:layout_below="@id/cprice"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
                 android:clickable="true"

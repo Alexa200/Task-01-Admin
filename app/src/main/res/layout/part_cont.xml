@@ -14,7 +14,7 @@
         android:background="@drawable/part_edit"
         android:orientation="vertical">
 
-        <Button
+        <!--<Button
             android:id="@+id/cnt_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#565656" />
+            android:background="#565656" />-->
 
         <Button
             android:id="@+id/cnt_delete"
