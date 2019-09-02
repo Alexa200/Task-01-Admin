@@ -109,7 +109,7 @@ public class Adpter_Car extends RecyclerView.Adapter<Adpter_Car.Shika>{
             public void onClick(View view) {
                 conf.dismiss();
                 Toast.makeText(cnt, "Delete id "+(String) kar.getcKey(), Toast.LENGTH_LONG).show();
-                Log.e("Delete id ", "onClick: "+(String) kar.getcKey() );
+                //Log.e("Delete id ", "onClick: "+(String) kar.getcKey() );
                 //DelPost( (String) kar.getcKey());
             }
         });

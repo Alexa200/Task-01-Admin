@@ -42,16 +42,14 @@
                         android:layout_height="wrap_content"
                         android:text="Maker "
                         android:textStyle="bold"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
                         android:layout_weight="1"/>
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="Answer Here"
+                        android:text="(Value)"
                         android:id="@+id/disp_maker"
-                        android:textStyle="bold"
-                        android:textSize="16sp"
                         android:layout_weight="1"/>
 
                 </LinearLayout>
@@ -66,15 +64,14 @@
                         android:layout_height="wrap_content"
                         android:text="Body "
                         android:textStyle="bold"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
                         android:layout_weight="1"/>
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="Answer Here"
+                        android:text="(Value)"
                         android:id="@+id/disp_body"
-                        android:textStyle="bold"
                         android:textSize="16sp"
                         android:layout_weight="1"/>
 
@@ -90,15 +87,14 @@
                         android:layout_height="wrap_content"
                         android:text="Condition"
                         android:textStyle="bold"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
                         android:layout_weight="1"/>
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="Answer Here"
+                        android:text="(Value)"
                         android:id="@+id/disp_condition"
-                        android:textStyle="bold"
                         android:textSize="16sp"
                         android:layout_weight="1"/>
 
@@ -114,7 +110,7 @@
                         android:layout_height="wrap_content"
                         android:text="Region "
                         android:textStyle="bold"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
                         android:layout_weight="1"/>
 
                     <TextView
@@ -122,9 +118,8 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Answer Here"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:text="(Value)"
+                        android:textSize="16sp" />
 
                 </LinearLayout>
 
@@ -138,15 +133,14 @@
                         android:layout_height="wrap_content"
                         android:text="Price "
                         android:textStyle="bold"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
                         android:layout_weight="1"/>
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="Answer Here"
+                        android:text="(Value)"
                         android:id="@+id/disp_price"
-                        android:textStyle="bold"
                         android:textSize="16sp"
                         android:layout_weight="1"/>
 

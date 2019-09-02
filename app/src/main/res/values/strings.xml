@@ -50,13 +50,11 @@
     <string-array name="Vmodel_arrays">
         <item>Body Type</item>
         <item>Saloon</item>
-        <item>Hatchbacks</item>
         <item>Pick Ups</item>
         <item>Trucks</item>
         <item>Buses</item>
         <item>Vans</item>
-        <item>Covertibles</item>
-        <item>Station Wagon</item>
+        <item>SUV</item>
         <item>Bikes</item>
     </string-array>
 

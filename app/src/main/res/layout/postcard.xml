@@ -45,7 +45,7 @@
 
                     </android.support.v4.view.ViewPager>
 
-                    <LinearLayout
+                    <!--<LinearLayout
                         android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -373,9 +373,336 @@
 
                         </LinearLayout>
 
+                    </LinearLayout>-->
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:id="@+id/posdet">
+
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/part_round2">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="120dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="Maker "
+                                    android:textStyle="bold"
+                                    android:textSize="16sp"/>
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="(Value)"
+                                    android:id="@+id/disp_maker"
+                                    android:textSize="16sp"
+                                    android:layout_weight="1"/>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="120dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="Body "
+                                    android:textStyle="bold"
+                                    android:textSize="16sp"/>
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="(Value)"
+                                    android:id="@+id/disp_body"
+                                    android:textSize="16sp"
+                                    android:layout_weight="1"/>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="120dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="Year"
+                                    android:textStyle="bold"
+                                    android:textSize="16sp"/>
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="(Value)"
+                                    android:id="@+id/disp_year"
+                                    android:textSize="16sp"
+                                    android:layout_weight="1"/>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="120dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="Mileage "
+                                    android:textStyle="bold"
+                                    android:textSize="16sp"/>
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="(Value)"
+                                    android:id="@+id/disp_mileage"
+                                    android:textSize="16sp"
+                                    android:layout_weight="1"/>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="120dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="Condition "
+                                    android:textStyle="bold"
+                                    android:textSize="16sp"/>
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="(Value)"
+                                    android:id="@+id/disp_condit"
+                                    android:textSize="16sp"
+                                    android:layout_weight="1"/>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="120dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="Engine "
+                                    android:textStyle="bold"
+                                    android:textSize="16sp"/>
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="(Value)"
+                                    android:id="@+id/disp_engine"
+                                    android:textSize="16sp"
+                                    android:layout_weight="1"/>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="120dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="Color "
+                                    android:textStyle="bold"
+                                    android:textSize="16sp"/>
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="(Value)"
+                                    android:id="@+id/disp_color"
+                                    android:textSize="16sp"
+                                    android:layout_weight="1"/>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="120dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="Transmision "
+                                    android:textStyle="bold"
+                                    android:textSize="16sp"/>
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="(Value)"
+                                    android:id="@+id/disp_trans"
+                                    android:textSize="16sp"
+                                    android:layout_weight="1"/>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="120dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="Interior "
+                                    android:textStyle="bold"
+                                    android:textSize="16sp"/>
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="(Value)"
+                                    android:id="@+id/disp_inter"
+                                    android:textSize="16sp"
+                                    android:layout_weight="1"/>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="120dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="Fuel "
+                                    android:textStyle="bold"
+                                    android:textSize="16sp"/>
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="(Value)"
+                                    android:id="@+id/disp_fuel"
+                                    android:textSize="16sp"
+                                    android:layout_weight="1"/>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="120dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="Description "
+                                    android:textStyle="bold"
+                                    android:textSize="16sp"/>
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="(Value)"
+                                    android:id="@+id/disp_desc"
+                                    android:textSize="16sp"
+                                    android:layout_weight="1"/>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="120dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="Price"
+                                    android:textStyle="bold"
+                                    android:textSize="16sp"/>
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="(Value)"
+                                    android:id="@+id/disp_price"
+                                    android:textSize="16sp"
+                                    android:layout_weight="1"/>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="120dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="Region"
+                                    android:textStyle="bold"
+                                    android:textSize="16sp"/>
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="(Value)"
+                                    android:id="@+id/disp_region"
+                                    android:textSize="16sp"
+                                    android:layout_weight="1"/>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="120dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="Posted"
+                                    android:textStyle="bold"
+                                    android:textSize="16sp"/>
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="(Value)"
+                                    android:id="@+id/disp_time"
+                                    android:textSize="16sp"
+                                    android:layout_weight="1"/>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
                     </LinearLayout>
 
                 </LinearLayout>
+
+
 
                 <android.support.design.widget.FloatingActionButton
                     android:id="@+id/postedit"
