@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.inc.niccher.task1">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
     <application
         android:name=".Task1"
         android:allowBackup="true"
@@ -19,6 +21,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!--<activity
+            android:name=".PhoneTest"
+            android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>-->
         <!--
         <activity android:name=".Casa"
             android:theme="@style/AppTheme2">
@@ -31,9 +43,10 @@
         -->
         <activity android:name=".NewDetails" />
         <activity android:name=".PhoneReq" />
-        <activity android:name=".PhoneTest" />
+        <!--<activity android:name=".PhoneTest" />-->
         <activity android:name=".Act_myProfile" />
-        <activity android:name=".Add_Car" />
+        <activity android:name=".Add_Car"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity android:name=".Add_Estate" />
         <activity android:name=".PostCarD" />
         <activity android:name=".PostCarSearch" />

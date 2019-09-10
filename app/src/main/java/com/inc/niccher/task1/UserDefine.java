@@ -47,7 +47,6 @@ public class UserDefine extends AppCompatActivity {
     EditText emlR,pwdR;
     TextView sback;
     ImageView imgsel,imgshow;
-    ProgressBar prg;
     ProgressDialog pds2;
 
     Uri uri_image;
@@ -77,7 +76,7 @@ public class UserDefine extends AppCompatActivity {
         sback = (TextView) findViewById(R.id.user_new_procid);
         imgsel = findViewById(R.id.com_imgsel);
         imgshow = findViewById(R.id.com_image);
-        prg=findViewById(R.id.progressBarR);
+        //prg=findViewById(R.id.progressBarR);
 
         emlR= (EditText) findViewById(R.id.user_set_usr);
         pwdR= (EditText) findViewById(R.id.user_set_phone);

@@ -42,8 +42,8 @@ import java.util.HashMap;
 
 public class Car_Edit extends AppCompatActivity {
 
-    private Spinner vmaker,vbody,vmodel,vyear,vmileage,vcondi,vng,vcolo,vtrans,vint,vfuel,vregion;
-    private EditText bigdesc,bigprice;
+    private Spinner vmaker,vbody,vmodel,vyear,vcondi,vng,vcolo,vtrans,vint,vfuel,vregion;
+    private EditText bigdesc,bigprice,vmileage;
     private Button btnSubmit,btnupload;
     private int coun=0;
     private ProgressDialog pds;
@@ -109,9 +109,6 @@ public class Car_Edit extends AppCompatActivity {
         vyear = (Spinner) findViewById(R.id.cyear);
         vyear.setOnItemSelectedListener(new CarMakerListing());
 
-        vmileage = (Spinner) findViewById(R.id.cmileage);
-        vmileage.setOnItemSelectedListener(new CarMakerListing());
-
         vcondi = (Spinner) findViewById(R.id.ccond);
         vcondi.setOnItemSelectedListener(new CarMakerListing());
 
@@ -135,6 +132,7 @@ public class Car_Edit extends AppCompatActivity {
 
         bigdesc =  findViewById(R.id.cdesc);
         bigprice =  findViewById(R.id.cprice);
+        vmileage= findViewById(R.id.cmileage);
 
         imgsel = findViewById(R.id.com_imagesel);
         btnupload = findViewById(R.id.upload);
@@ -210,7 +208,7 @@ public class Car_Edit extends AppCompatActivity {
         hasm2.put("cBody" ,String.valueOf(vbody.getSelectedItem()));
         hasm2.put("cModel" ,String.valueOf(vmodel.getSelectedItem()));
         hasm2.put("cYear" ,String.valueOf(vyear.getSelectedItem()));
-        hasm2.put("cMileage" ,String.valueOf(vmileage.getSelectedItem()));
+        hasm2.put("cMileage" ,String.valueOf(vmileage.getText().toString().trim()));
         hasm2.put("cCondition",String.valueOf(vcondi.getSelectedItem()));
         hasm2.put("cEngine" ,String.valueOf(vng.getSelectedItem()));
         hasm2.put("cColor" ,String.valueOf(vcolo.getSelectedItem()));
@@ -325,7 +323,7 @@ public class Car_Edit extends AppCompatActivity {
                 vbody.setSelection(getIndex(vbody, (String) dataSnapshot.child("cBody").getValue()));
                 vmodel.setSelection(getIndex(vmodel, (String) dataSnapshot.child("cModel").getValue()));
                 vyear.setSelection(getIndex(vyear, (String) dataSnapshot.child("cYear").getValue()));
-                vmileage.setSelection(getIndex(vmileage, (String) dataSnapshot.child("cMileage").getValue()));
+                vmileage.setText((String) dataSnapshot.child("cMileage").getValue());
                 vcondi.setSelection(getIndex(vcondi, (String) dataSnapshot.child("cCondition").getValue()));
                 vng.setSelection(getIndex(vng, (String) dataSnapshot.child("cEngine").getValue()));
                 vcolo.setSelection(getIndex(vcolo, (String) dataSnapshot.child("cColor").getValue()));

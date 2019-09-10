@@ -195,18 +195,25 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="Mileage"
-                        android:layout_weight="1"
+                        android:layout_weight="0.50"
                         android:padding="16dp"
                         android:textSize="16dp"/>
 
-                    <Spinner
-                        android:id="@+id/cmileage"
+                    <android.support.design.widget.TextInputLayout
                         android:layout_width="0dp"
-                        android:gravity="end"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:entries="@array/Vmileage_arrays"
-                        android:prompt="@string/Vmileage_prompt" />
+                        android:layout_weight="0.50"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/cmileage"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Miles Travelled"
+                            android:inputType="number"
+                            android:maxLines="1"
+                            android:singleLine="true" />
+
+                    </android.support.design.widget.TextInputLayout>
 
                 </LinearLayout>
 
@@ -501,6 +508,7 @@
 
             <View
                 android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_height="1dp"
@@ -537,39 +545,106 @@
                 android:inputType="number" />
 
 
-            <ImageView
-                android:layout_marginTop="20dp"
-                android:id="@+id/com_imagesel"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0250dp"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@id/cprice"
-                android:layout_marginLeft="40dp"
-                android:layout_marginRight="40dp"
-                android:clickable="true"
-                android:elevation="5dp"
-                android:padding="20dp"
-                android:background="#b2b1b3"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_addcimg" />
-
-            <Button
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Upload"
-                android:id="@+id/upload"
-                android:layout_below="@+id/com_imagesel"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="10dp"
-                android:layout_centerHorizontal="true" />
+                android:orientation="vertical"
+                android:id="@+id/img"
+                android:layout_below="@+id/cprice">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_horizontal">
+
+                    <ImageView
+                        android:id="@+id/com_imagesel"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginRight="40dp"
+                        android:layout_marginTop="20dp"
+                        android:background="#b2b1b3"
+                        android:clickable="true"
+                        android:elevation="5dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_addcimg" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Upload Image"
+                        android:id="@+id/upload"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_gravity="center_vertical"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_height="1dp"
+                    android:background="#f71b03" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/vid"
+                android:layout_below="@+id/img">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_horizontal">
+
+                    <VideoView
+                        android:id="@+id/com_vid"
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="20dp"
+                        android:background="#b2b1b3"
+                        android:clickable="true"
+                        android:elevation="5dp"
+                        android:scaleType="centerCrop"/>
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Upload Video"
+                        android:id="@+id/sedvid"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_gravity="center_vertical"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_height="1dp"
+                    android:background="#f71b03" />
+
+            </LinearLayout>
 
             <Button
                 android:id="@+id/fina"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:layout_below="@+id/upload"
+                android:layout_below="@+id/vid"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
                 android:text="Finish" />
