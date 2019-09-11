@@ -6,9 +6,19 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
 
 //import com.theartofdev.edmodo.cropper.CropImage;
 //import com.theartofdev.edmodo.cropper.CropImageView;
@@ -20,6 +30,15 @@ import android.view.ViewGroup;
 public class Frag_Home extends Fragment {
 
     CardView cvcars,cvestate,cvadcar,cvadest,cvprof;
+    FirebaseAuth mAuth;
+    FirebaseUser userf;
+    DatabaseReference dref,drefup;
+    FirebaseDatabase fdbas;
+
+    String hexid;
+
+    private StorageReference mStorageRef;
+    private StorageTask mUploadTask;
 
 
     public Frag_Home() {
@@ -32,6 +51,12 @@ public class Frag_Home extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View fraghome= inflater.inflate(R.layout.frag_home, container, false);
+
+        mAuth = FirebaseAuth.getInstance();
+        userf=mAuth.getCurrentUser();
+        fdbas= FirebaseDatabase.getInstance();
+
+        mStorageRef = FirebaseStorage.getInstance().getReference("VehicleImgs");
 
         cvcars=fraghome.findViewById(R.id.cardcars);
         cvestate=fraghome.findViewById(R.id.cardestate);
@@ -76,7 +101,11 @@ public class Frag_Home extends Fragment {
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();*/
 
-                startActivity(new Intent(getActivity(), Add_Car.class));
+                Setta();
+                Intent newcar=new Intent(getActivity(), Add_Car.class);
+                newcar.putExtra("Kiy",hexid);
+                hexid=null;
+                startActivity(newcar);
             }
         });
 
@@ -91,7 +120,11 @@ public class Frag_Home extends Fragment {
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();*/
 
-                startActivity(new Intent(getActivity(), Add_Estate.class));
+                Setta();
+                Intent newest=new Intent(getActivity(), Add_Estate.class);
+                newest.putExtra("Kiy",hexid);
+                hexid=null;
+                startActivity(newest);
             }
         });
 
@@ -105,6 +138,25 @@ public class Frag_Home extends Fragment {
 
 
         return fraghome;
+    }
+
+    private void Setta(){
+        dref = FirebaseDatabase.getInstance().getReference("Posteds/Vehicles/");
+        try {
+            if (hexid.length() < 0){
+                hexid= dref.push().getKey();
+                //Log.e("Ids ", "dref.push().getKey() new ID Generated"+hexid );
+                //Toast.makeText(getContext(), "New Key", Toast.LENGTH_SHORT).show();
+            }else {
+                //Log.e("Ids ", "dref.push().getKey() Old upload =new ID "+hexid );
+                //Toast.makeText(getContext(), "Old Key=New Key", Toast.LENGTH_SHORT).show();
+            }
+        }catch (Exception ex){
+            hexid= dref.push().getKey();
+            //Log.e("Ids ", "Setta error Caught "+hexid );
+            //Toast.makeText(getContext(), "Setta Caught"+hexid, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getContext(), "Setta Caught"+ex, Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

@@ -52,6 +52,8 @@
         <activity android:name=".PostCarSearch" />
         <activity android:name=".Car_Edit"/>
         <activity android:name=".UserDefine" />
+        <activity android:name=".Estate_Edit"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />

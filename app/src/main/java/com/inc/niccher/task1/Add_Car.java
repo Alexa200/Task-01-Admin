@@ -48,8 +48,8 @@ import java.util.HashMap;
 
 public class Add_Car extends AppCompatActivity {
 
-    private Spinner vmaker,vbody,vmodel,vyear,vcondi,vng,vcolo,vtrans,vint,vfuel,vregion;
-    private EditText bigdesc,bigprice,vmileage;
+    private Spinner vmaker,vbody,vyear,vcondi,vng,vcolo,vtrans,vint,vfuel,vregion;
+    private EditText bigdesc,bigprice,vmileage,vmodel;
     private Button btnSubmit,btnupload,btnvid;
     private int coun=0,reqcod=4;
     private String uploadId ;
@@ -59,6 +59,7 @@ public class Add_Car extends AppCompatActivity {
     private VideoView vidsel;
 
     Uri uri_image;
+    Intent proc;
 
     FirebaseAuth mAuth;
     FirebaseUser userf;
@@ -85,14 +86,18 @@ public class Add_Car extends AppCompatActivity {
 
         mStorageRef = FirebaseStorage.getInstance().getReference("VehicleImgs");
 
+        proc=getIntent();
+
+        Setta();
+
         vmaker = (Spinner) findViewById(R.id.cmaka);
         vmaker.setOnItemSelectedListener(new CarMakerListing());
 
         vbody = (Spinner) findViewById(R.id.cbody);
         vbody.setOnItemSelectedListener(new CarMakerListing());
 
-        vmodel = (Spinner) findViewById(R.id.cmodel);
-        vmodel.setOnItemSelectedListener(new CarMakerListing());
+        //vmodel = (Spinner) findViewById(R.id.cmodel);
+        //vmodel.setOnItemSelectedListener(new CarMakerListing());
 
         vyear = (Spinner) findViewById(R.id.cyear);
         vyear.setOnItemSelectedListener(new CarMakerListing());
@@ -121,6 +126,7 @@ public class Add_Car extends AppCompatActivity {
         bigdesc =  findViewById(R.id.cdesc);
         bigprice =  findViewById(R.id.cprice);
         vmileage= findViewById(R.id.cmileage);
+        vmodel=findViewById(R.id.cmodel);
 
         imgsel = findViewById(R.id.com_imagesel);
         vidsel = findViewById(R.id.com_vid);
@@ -197,24 +203,19 @@ public class Add_Car extends AppCompatActivity {
         }
     }
 
-    private String Setta(){
-        dref = FirebaseDatabase.getInstance().getReference("Posteds/Vehicles/");
+    private void Setta(){
+        uploadId=proc.getStringExtra("Kiy");
         try {
-            if (uploadId.length() < 0){
-                uploadId= dref.push().getKey();
-                Log.e("Ids ", "dref.push().getKey() new ID Generated"+uploadId );
-                Toast.makeText(this, "New Key", Toast.LENGTH_SHORT).show();
+            if (uploadId.length() < 1){
+                finish();
+                startActivity(new Intent(Add_Car.this, Casa.class));
+                Toast.makeText(this, "No key Passed", Toast.LENGTH_LONG).show();
             }else {
-                Log.e("Ids ", "dref.push().getKey() Old upload =new ID "+uploadId );
-                Toast.makeText(this, "Old Key=New Key", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Setta Cars Caught -> "+uploadId, Toast.LENGTH_LONG).show();
             }
         }catch (Exception ex){
-            uploadId= dref.push().getKey();
-            Log.e("Ids ", "Setta error Caught "+uploadId );
-            Toast.makeText(this, "Setta Caught", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Setta Error -> "+ex, Toast.LENGTH_LONG).show();
         }
-
-        return uploadId;
     }
 
     private void SendComit() {
@@ -235,7 +236,7 @@ public class Add_Car extends AppCompatActivity {
 
         hasm2.put("cMaker" ,String.valueOf(vmaker.getSelectedItem()));
         hasm2.put("cBody" ,String.valueOf(vbody.getSelectedItem()));
-        hasm2.put("cModel" ,String.valueOf(vmodel.getSelectedItem()));
+        hasm2.put("cModel" ,vmodel.getText().toString());
         hasm2.put("cYear" ,String.valueOf(vyear.getSelectedItem()));
         hasm2.put("cMileage" ,String.valueOf(vmileage.getText().toString()));
         hasm2.put("cCondition",String.valueOf(vcondi.getSelectedItem()));

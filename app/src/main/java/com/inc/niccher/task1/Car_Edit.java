@@ -42,8 +42,8 @@ import java.util.HashMap;
 
 public class Car_Edit extends AppCompatActivity {
 
-    private Spinner vmaker,vbody,vmodel,vyear,vcondi,vng,vcolo,vtrans,vint,vfuel,vregion;
-    private EditText bigdesc,bigprice,vmileage;
+    private Spinner vmaker,vbody,vyear,vcondi,vng,vcolo,vtrans,vint,vfuel,vregion;
+    private EditText bigdesc,bigprice,vmileage,vmodel;
     private Button btnSubmit,btnupload;
     private int coun=0;
     private ProgressDialog pds;
@@ -103,8 +103,8 @@ public class Car_Edit extends AppCompatActivity {
         vbody = (Spinner) findViewById(R.id.cbody);
         vbody.setOnItemSelectedListener(new CarMakerListing());
 
-        vmodel = (Spinner) findViewById(R.id.cmodel);
-        vmodel.setOnItemSelectedListener(new CarMakerListing());
+        //vmodel = (Spinner) findViewById(R.id.cmodel);
+        //vmodel.setOnItemSelectedListener(new CarMakerListing());
 
         vyear = (Spinner) findViewById(R.id.cyear);
         vyear.setOnItemSelectedListener(new CarMakerListing());
@@ -133,6 +133,7 @@ public class Car_Edit extends AppCompatActivity {
         bigdesc =  findViewById(R.id.cdesc);
         bigprice =  findViewById(R.id.cprice);
         vmileage= findViewById(R.id.cmileage);
+        vmodel= findViewById(R.id.cmodel);
 
         imgsel = findViewById(R.id.com_imagesel);
         btnupload = findViewById(R.id.upload);
@@ -206,7 +207,7 @@ public class Car_Edit extends AppCompatActivity {
 
         hasm2.put("cMaker" ,String.valueOf(vmaker.getSelectedItem()));
         hasm2.put("cBody" ,String.valueOf(vbody.getSelectedItem()));
-        hasm2.put("cModel" ,String.valueOf(vmodel.getSelectedItem()));
+        hasm2.put("cModel" ,String.valueOf(vmodel.getText().toString()));
         hasm2.put("cYear" ,String.valueOf(vyear.getSelectedItem()));
         hasm2.put("cMileage" ,String.valueOf(vmileage.getText().toString().trim()));
         hasm2.put("cCondition",String.valueOf(vcondi.getSelectedItem()));
@@ -321,7 +322,6 @@ public class Car_Edit extends AppCompatActivity {
 
                 vmaker.setSelection(getIndex(vmaker, (String) dataSnapshot.child("cMaker").getValue()));
                 vbody.setSelection(getIndex(vbody, (String) dataSnapshot.child("cBody").getValue()));
-                vmodel.setSelection(getIndex(vmodel, (String) dataSnapshot.child("cModel").getValue()));
                 vyear.setSelection(getIndex(vyear, (String) dataSnapshot.child("cYear").getValue()));
                 vmileage.setText((String) dataSnapshot.child("cMileage").getValue());
                 vcondi.setSelection(getIndex(vcondi, (String) dataSnapshot.child("cCondition").getValue()));
@@ -334,6 +334,7 @@ public class Car_Edit extends AppCompatActivity {
 
                 bigdesc.setText((String) dataSnapshot.child("cDesc").getValue());
                 bigprice.setText((String) dataSnapshot.child("cPrice").getValue());
+                vmodel.setText((String) dataSnapshot.child("cModel").getValue());
 
                 try {
                     Picasso.get().load((String) dataSnapshot.child("cImg0").getValue()).into(imgsel);

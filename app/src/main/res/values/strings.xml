@@ -8,13 +8,82 @@
 
     <string-array name="Vmaker_arrays">
         <item>Manufacturer</item>
-        <item>Toyota</item>
-        <item>Nissan</item>
-        <item>Subaru</item>
-        <item>Honda</item>
-        <item>Mazda</item>
-        <item>Volkswagen</item>
-        <item>Land Rover</item>
+        <item> Abarth</item>
+        <item> Acura </item>
+        <item> Alfa Romeo </item>
+        <item> AMC </item>
+        <item> Aston Martin</item>
+        <item> Audi </item>
+        <item> Bentley </item>
+        <item> BMW </item>
+        <item> Buick </item>
+        <item> Cadillac </item>
+        <item> Chevrolet </item>
+        <item> Chrysler </item>
+        <item> Citrogen </item>
+        <item> De Tomaso </item>
+        <item> Devon </item>
+        <item> DeLorean </item>
+        <item> Dodge </item>
+        <item> Eagle Talon </item>
+        <item> Ferrari </item>
+        <item> Fiat </item>
+        <item> Ford </item>
+        <item> GMC </item>
+        <item> Holden </item>
+        <item> Honda </item>
+        <item> Hummer </item>
+        <item> Hyundai </item>
+        <item> Infiniti </item>
+        <item> Jaguar </item>
+        <item> Jeep </item>
+        <item> Joss </item>
+        <item> Kia </item>
+        <item> Koenigsegg </item>
+        <item> Lamborghini </item>
+        <item> Lancia </item>
+        <item> Land Rover </item>
+        <item> Lexus </item>
+        <item> Lotus </item>
+        <item> Maserati </item>
+        <item> Mazda </item>
+        <item> McLaren </item>
+        <item> Mercedes-Benz </item>
+        <item> Mercury </item>
+        <item> Mini </item>
+        <item> Mitsubishi </item>
+        <item> Morgan </item>
+        <item> Aero </item>
+        <item> Mosler </item>
+        <item> Nissan </item>
+        <item> Oldsmobile </item>
+        <item> Opel </item>
+        <item> Pagani </item>
+        <item> Panoz </item>
+        <item> Peugeot </item>
+        <item> Plymouth </item>
+        <item> Pontiac </item>
+        <item> Radical </item>
+        <item> Renault </item>
+        <item> Rossion </item>
+        <item> Ruf </item>
+        <item> Saab </item>
+        <item> Saleen </item>
+        <item> Saturn ></item>
+        <item> SSC </item>
+        <item> Scion </item>
+        <item> Seat </item>
+        <item> Shelby </item>
+        <item> Spada </item>
+        <item> Spyker </item>
+        <item> Subaru </item>
+        <item> Suzuki </item>
+        <item> Toyota </item>
+        <item> TVR </item>
+        <item> Vauxhall </item>
+        <item> Volkswagon </item>
+        <item> Volvo </item>
+        <item> Wiesman </item>
     </string-array>
 
     <string name="Vbody_prompt">Model Type</string>

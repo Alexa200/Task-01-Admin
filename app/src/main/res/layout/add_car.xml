@@ -55,7 +55,6 @@
 
             <LinearLayout
                 android:id="@+id/laymodel"
-                android:visibility="gone"
                 android:layout_below="@+id/laybody"
                 android:layout_marginTop="15dp"
                 android:layout_width="match_parent"
@@ -70,19 +69,27 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="Model Type"
-                        android:layout_weight="1"
+                        android:text="Vehicle Model"
+                        android:layout_weight="0.49"
                         android:padding="16dp"
                         android:textSize="16dp"/>
 
-                    <Spinner
-                        android:id="@+id/cmodel"
+                    <android.support.design.widget.TextInputLayout
                         android:layout_width="0dp"
-                        android:gravity="end"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:entries="@array/Vbodyty_arrays"
-                        android:prompt="@string/Vbody_prompt"/>
+                        android:layout_weight="0.50"
+                        android:paddingRight="20dp"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/cmodel"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Model"
+                            android:inputType="textCapWords"
+                            android:maxLines="1"
+                            android:singleLine="true" />
+
+                    </android.support.design.widget.TextInputLayout>
 
                 </LinearLayout>
 
@@ -177,7 +184,6 @@
 
             </LinearLayout>
 
-
             <LinearLayout
                 android:id="@+id/laymile"
                 android:layout_below="@+id/layyear"
@@ -202,6 +208,7 @@
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="0dp"
                         android:layout_weight="0.50"
+                        android:paddingRight="20dp"
                         android:layout_height="wrap_content">
 
                         <EditText
