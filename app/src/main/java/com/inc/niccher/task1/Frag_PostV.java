@@ -58,6 +58,8 @@ public class Frag_PostV extends Fragment {
     Adpter_Car adpost;
     Context relcon;
 
+    String admins[]=new String[]{};
+
     public Frag_PostV() {
         // Required empty public constructor
     }
@@ -91,7 +93,6 @@ public class Frag_PostV extends Fragment {
     }
 
     private void FetcpostV() {
-        //"+userf.getUid()+"
         DatabaseReference dref3 = FirebaseDatabase.getInstance().getReference("Posteds/Vehicles");
         dref3.keepSynced(true);
 
@@ -124,14 +125,6 @@ public class Frag_PostV extends Fragment {
         setHasOptionsMenu(true);
         super.onCreate(savedInstanceState);
     }
-
-    /*@Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        //inflater = getActivity().getMenuInflater();
-        inflater.inflate(R.menu.menu_more, menu);
-        super.onCreateOptionsMenu(menu, inflater);
-        //super.onCreateOptionsMenu(menu, inflater);
-    }*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

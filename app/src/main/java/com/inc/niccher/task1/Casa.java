@@ -96,11 +96,18 @@ public class Casa extends AppCompatActivity implements NavigationView.OnNavigati
     private void GetTarget() {
         try {
             had=targ.getStringExtra("PostUUIDCode")+"--";
-            Log.e("getStringExtra", "GetTarget: "+had );
+            //Log.e("getStringExtra", "GetTarget: "+had );
             if (had.equals("Posts--")){
                 Fragment frags=null;
                 getSupportActionBar().setTitle("Posts");
                 frags=new Frag_PostV();
+                FragmentManager frman0=getSupportFragmentManager();
+                frman0.beginTransaction().replace(R.id.maincontaina,frags).commit();
+
+            }else if (had.equals("PostsE--")){
+                Fragment frags=null;
+                getSupportActionBar().setTitle("Posts");
+                frags=new Frag_PostE();
                 FragmentManager frman0=getSupportFragmentManager();
                 frman0.beginTransaction().replace(R.id.maincontaina,frags).commit();
 
@@ -196,7 +203,13 @@ public class Casa extends AppCompatActivity implements NavigationView.OnNavigati
         Fragment frags=null;
 
         switch (item.getItemId()){
-            case R.id.nav_postv:{
+            case R.id.nav_home:{
+                frags=new Frag_Home();
+                getSupportActionBar().setTitle("Dashboard");
+                FragmentManager frmanh=getSupportFragmentManager();
+                frmanh.beginTransaction().replace(R.id.maincontaina,frags).commit();
+                break;
+            }case R.id.nav_postv:{
                 frags=new Frag_PostV();
                 getSupportActionBar().setTitle("Posted Estates");
                 FragmentManager frman2=getSupportFragmentManager();

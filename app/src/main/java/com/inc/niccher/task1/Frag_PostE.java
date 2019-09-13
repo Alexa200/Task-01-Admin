@@ -1,6 +1,9 @@
 package com.inc.niccher.task1;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,6 +12,15 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,9 +30,15 @@ import java.util.List;
  */
 public class Frag_PostE extends Fragment {
 
-    RecyclerView recyl;
+    ProgressDialog pd2;
 
-    List <String> chatedlist;
+    FirebaseAuth mAuth;
+    FirebaseUser userf;
+
+    RecyclerView postlist;
+    List<Mod_E> modpost;
+    Adpter_Estate adpost;
+    Context relcon;
 
     public Frag_PostE() {
         // Required empty public constructor
@@ -30,16 +48,55 @@ public class Frag_PostE extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View solv= inflater.inflate(R.layout.frag_poste, container, false);
+        View pose= inflater.inflate(R.layout.frag_poste, container, false);
 
-        /*recyl=solv.findViewById(R.id.chat_list);
-        recyl.setHasFixedSize(true);
-        recyl.setLayoutManager(new LinearLayoutManager(getActivity()));
-        chatedlist=new ArrayList<>();*/
+        mAuth= FirebaseAuth.getInstance();
+        userf=mAuth.getCurrentUser();
 
-        return solv;
+        pd2=new ProgressDialog(getActivity());
+
+        postlist=pose.findViewById(R.id.postrecycla);
+        postlist.setHasFixedSize(true);
+
+        LinearLayoutManager lima=new LinearLayoutManager(getActivity());
+        lima.setReverseLayout(true);
+        lima.setStackFromEnd(true);
+        postlist.setLayoutManager(lima);
+
+        modpost=new ArrayList<>();
+
+        FetcpostE();
+
+        return pose;
     }
 
+    private void FetcpostE() {
+        //"+userf.getUid()+"
+        DatabaseReference dref3 = FirebaseDatabase.getInstance().getReference("Posteds/Estates");
+        dref3.keepSynced(true);
+
+        dref3.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot3) {
+                modpost.clear();
+                for (DataSnapshot dataSnapshot2:dataSnapshot3.getChildren()){
+                    Mod_E poss=dataSnapshot2.getValue(Mod_E.class);
+
+                    modpost.add(poss);
+
+                    adpost=new Adpter_Estate(getContext(),modpost);
+                    postlist.setAdapter(adpost);
+                }
+
+                adpost.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
 
 
     @Override
@@ -51,8 +108,16 @@ public class Frag_PostE extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        int cas=item.getItemId();
-        if (cas== R.id.act_logout){
+        int id = item.getItemId();
+        if (id == R.id.act_settings) {
+            Toast.makeText(getContext(), "Activity Under Active Development", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+
+        if (id == R.id.act_search) {
+            //startActivity(new Intent(getActivity(), PostCarSearch.class));
+            Toast.makeText(getContext(), "Settings Pressed", Toast.LENGTH_SHORT).show();
+            return true;
         }
 
         return super.onOptionsItemSelected(item);

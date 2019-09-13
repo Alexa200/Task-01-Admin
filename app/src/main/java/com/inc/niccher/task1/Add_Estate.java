@@ -69,7 +69,7 @@ public class Add_Estate extends AppCompatActivity {
                 //Toast.makeText(this, "Setta Estate Caught -> "+uploadId, Toast.LENGTH_LONG).show();
             }
         }catch (Exception ex){
-            Toast.makeText(this, "Setta Error -> "+ex, Toast.LENGTH_LONG).show();
+            //Toast.makeText(this, "Setta Error -> "+ex, Toast.LENGTH_LONG).show();
         }
     }
 

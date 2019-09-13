@@ -20,9 +20,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 
-//import com.theartofdev.edmodo.cropper.CropImage;
-//import com.theartofdev.edmodo.cropper.CropImageView;
-
 
 /**
  * A simple {@link Fragment} subclass.
@@ -93,14 +90,6 @@ public class Frag_Home extends Fragment {
         cvadcar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*Add_Car fracar=new Add_Car();
-
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.maincontaina, fracar);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();*/
-
                 Setta();
                 Intent newcar=new Intent(getActivity(), Add_Car.class);
                 newcar.putExtra("Kiy",hexid);
@@ -112,14 +101,6 @@ public class Frag_Home extends Fragment {
         cvadest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*Add_Estate fraest=new Add_Estate();
-
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.maincontaina, fraest);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();*/
-
                 Setta();
                 Intent newest=new Intent(getActivity(), Add_Estate.class);
                 newest.putExtra("Kiy",hexid);
@@ -141,7 +122,7 @@ public class Frag_Home extends Fragment {
     }
 
     private void Setta(){
-        dref = FirebaseDatabase.getInstance().getReference("Posteds/Vehicles/");
+        dref = FirebaseDatabase.getInstance().getReference("Posteds");
         try {
             if (hexid.length() < 0){
                 hexid= dref.push().getKey();

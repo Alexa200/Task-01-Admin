@@ -209,12 +209,12 @@ public class Add_Car extends AppCompatActivity {
             if (uploadId.length() < 1){
                 finish();
                 startActivity(new Intent(Add_Car.this, Casa.class));
-                Toast.makeText(this, "No key Passed", Toast.LENGTH_LONG).show();
+                //Toast.makeText(this, "No key Passed", Toast.LENGTH_LONG).show();
             }else {
-                Toast.makeText(this, "Setta Cars Caught -> "+uploadId, Toast.LENGTH_LONG).show();
+                //Toast.makeText(this, "Setta Cars Caught -> "+uploadId, Toast.LENGTH_LONG).show();
             }
         }catch (Exception ex){
-            Toast.makeText(this, "Setta Error -> "+ex, Toast.LENGTH_LONG).show();
+            //Toast.makeText(this, "Setta Error -> "+ex, Toast.LENGTH_LONG).show();
         }
     }
 

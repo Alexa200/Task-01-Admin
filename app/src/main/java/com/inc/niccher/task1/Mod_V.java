@@ -5,7 +5,6 @@ package com.inc.niccher.task1;
  */
 
 class Mod_V {
-    //Maker,Body,Model,Year,Mileage,Condition,Engine,Color,Transmision,Interior,Fuel,Desc,Key,Time;
     String cMaker,cBody,cModel,cYear,cMileage,cCondition,cEngine,cColor,cTransmision,cInterior,cFuel,cDesc,cKey,cTime,cPrice,cRegion,cImg0;
 
     public Mod_V() {

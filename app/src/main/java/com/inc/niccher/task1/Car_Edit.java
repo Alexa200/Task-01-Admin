@@ -220,6 +220,8 @@ public class Car_Edit extends AppCompatActivity {
 
         hasm2.put("cRegion" ,String.valueOf(vregion.getSelectedItem()));
         hasm2.put("cPrice",bigprice.getText().toString());
+        hasm2.put("cModel",vmodel.getText().toString());
+
 
         mDatabaseRef.updateChildren(hasm2).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override

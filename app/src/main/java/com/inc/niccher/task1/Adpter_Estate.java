@@ -32,10 +32,10 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 
-public class Adpter_Car extends RecyclerView.Adapter<Adpter_Car.Shika>{
+public class Adpter_Estate extends RecyclerView.Adapter<Adpter_Estate.Shika>{
 
     Context cnt;
-    List<Mod_V> poslist;
+    List<Mod_E> poslist;
     Dialog conf;
     String Postid=null;
 
@@ -47,14 +47,14 @@ public class Adpter_Car extends RecyclerView.Adapter<Adpter_Car.Shika>{
     FirebaseUser userf;
     DatabaseReference dref1;
 
-    public Adpter_Car(Context cnt, List<Mod_V> poslist) {
+    public Adpter_Estate(Context cnt, List<Mod_E> poslist) {
         this.cnt = cnt;
         this.poslist = poslist;
     }
 
     @Override
     public Shika onCreateViewHolder(ViewGroup parent, int viewType) {
-        View infla= LayoutInflater.from(cnt).inflate(R.layout.part_postv,parent,false);
+        View infla= LayoutInflater.from(cnt).inflate(R.layout.part_poste,parent,false);
 
         fusa= FirebaseAuth.getInstance().getCurrentUser();
 
@@ -74,21 +74,25 @@ public class Adpter_Car extends RecyclerView.Adapter<Adpter_Car.Shika>{
     @Override
     public void onBindViewHolder(Shika holder, final int position) {
 
-        final Mod_V kar=poslist.get(position);
+        final Mod_E kar=poslist.get(position);
 
-        holder.viu_Bod.setText(kar.getcBody());
-        holder.viu_Mak.setText(kar.getcMaker());
-        holder.viu_Conditio.setText(kar.getcCondition());
-        holder.viu_Pric.setText(kar.getcPrice());
-        holder.viu_region.setText(kar.getcRegion());
+        try {
+            holder.viu_Loc.setText(kar.geteCounty()+" at "+kar.eCountySub);
+            holder.viu_Area.setText(kar.geteArea());
+            holder.viu_Pric.setText(kar.getePrice());
+            holder.viu_typ.setText(kar.geteType());
 
-        Picasso.get().load(kar.cImg0).into(holder.viu_carimg);
+            Picasso.get().load(kar.geteImg0()).into(holder.viu_estimg);
+        }catch (Exception es){
+            Toast.makeText(cnt, "No Posted Ads currently\n"+es.getMessage(), Toast.LENGTH_LONG).show();
+        }
 
         delpos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 conf.dismiss();
-                Toast.makeText(cnt, "Delete id "+(String) kar.getcKey(), Toast.LENGTH_LONG).show();
+                Toast.makeText(cnt, "Delete id "+(String) kar.geteKey(), Toast.LENGTH_LONG).show();
+                //Log.e("Delete id ", "onClick: "+(String) kar.getcKey() );
                 //DelPost( (String) kar.getcKey());
             }
         });
@@ -104,8 +108,8 @@ public class Adpter_Car extends RecyclerView.Adapter<Adpter_Car.Shika>{
         holder.viu_PosDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent posd=new Intent(cnt, PostCarD.class);
-                posd.putExtra("PostUUIDCode",(String) kar.getcKey());
+                Intent posd=new Intent(cnt, PostEstateD.class);
+                posd.putExtra("PostUUIDCode",(String) kar.geteKey());
                 cnt.startActivity(new Intent(posd));
             }
         });
@@ -147,20 +151,19 @@ public class Adpter_Car extends RecyclerView.Adapter<Adpter_Car.Shika>{
 
     class Shika extends RecyclerView.ViewHolder {
 
-        public TextView viu_Mak,viu_Bod,viu_Conditio,viu_Pric,viu_region;
-        public ImageView viu_carimg;
+        public TextView viu_Loc,viu_Area,viu_Pric,viu_typ;
+        public ImageView viu_estimg;
         RelativeLayout viu_PosDetail;
 
         public Shika(View itemView) {
             super(itemView);
 
-            viu_Mak = itemView.findViewById(R.id.disp_maker);
-            viu_Bod = itemView.findViewById(R.id.disp_body);
-            viu_Conditio = itemView.findViewById(R.id.disp_condition);
-            viu_Pric = itemView.findViewById(R.id.disp_price);
-            viu_region = itemView.findViewById(R.id.disp_region);
+            viu_Loc = itemView.findViewById(R.id.est_loc);
+            viu_Area = itemView.findViewById(R.id.est_area);
+            viu_Pric = itemView.findViewById(R.id.est_pric);
+            viu_typ = itemView.findViewById(R.id.est_typ);
 
-            viu_carimg = itemView.findViewById(R.id.disp_imgs);
+            viu_estimg= itemView.findViewById(R.id.est_imgs);
             viu_PosDetail = itemView.findViewById(R.id.disp_post);
         }
     }

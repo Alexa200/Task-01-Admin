@@ -1,28 +1,20 @@
 package com.inc.niccher.task1;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.ColorSpace;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ExpandableListAdapter;
-import android.widget.ExpandableListView;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.VideoView;
@@ -32,8 +24,11 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -44,16 +39,14 @@ import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.List;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Estate_Edit extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class Estate_Modify extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     Spinner County,SubCounty;
     ArrayAdapter<String> countyArray,subcountyArray;
@@ -111,7 +104,7 @@ public class Estate_Edit extends AppCompatActivity implements AdapterView.OnItem
                     .setBorderCornerColor(Color.BLUE)
                     .setGuidelinesColor(Color.GREEN)
                     .setBorderLineThickness(2)
-                    .start(Estate_Edit.this);
+                    .start(Estate_Modify.this);
             }
         });
 
@@ -120,7 +113,7 @@ public class Estate_Edit extends AppCompatActivity implements AdapterView.OnItem
             @Override
             public void onClick(View v) {
                 if (mUploadTask != null && mUploadTask.isInProgress()) {
-                    Toast.makeText(Estate_Edit.this, "Upload in progress", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Estate_Modify.this, "Upload in progress", Toast.LENGTH_SHORT).show();
                 } else {
                     uploadFile();
                     //Toast.makeText(MainActivity.this, mPostBody.getText().toString().trim(), Toast.LENGTH_SHORT).show();
@@ -989,7 +982,7 @@ public class Estate_Edit extends AppCompatActivity implements AdapterView.OnItem
         int idd=item.getItemId();
         if (idd==android.R.id.home){
             finish();
-            startActivity(new Intent(Estate_Edit.this,Add_Estate.class));
+            startActivity(new Intent(Estate_Modify.this,Add_Estate.class));
         }
         return super.onOptionsItemSelected(item);
     }
@@ -1013,27 +1006,69 @@ public class Estate_Edit extends AppCompatActivity implements AdapterView.OnItem
     }
 
     private void Init(){
-        Ki=getta.getStringExtra("Kiy");
-        typ=getta.getStringExtra("Typee");
+        Ki=getta.getStringExtra("KiyEdit");
 
         try {
-            if (Ki.length() < 1 || typ.length()< 1){
+            if (Ki.length() < 1 ){
                 finish();
-                startActivity(new Intent(Estate_Edit.this, Add_Estate.class));
-                Toast.makeText(this, "No key Passed", Toast.LENGTH_LONG).show();
+                Intent hom=new Intent(Estate_Modify.this,Casa.class);
+                hom.putExtra("PostUUIDCode","PostsE");
+                startActivity(hom);
             }
         }catch (Exception ex){
-            Toast.makeText(this, "Setta Error -> "+ex, Toast.LENGTH_LONG).show();
+            //Toast.makeText(this, "Setta Error -> "+ex, Toast.LENGTH_LONG).show();
         }
+
+        Loader();
+    }
+
+    private void Loader(){
+        pds22.setMessage("Loading Info");
+        pds22.show();
+
+        DatabaseReference mDatabaseRef= FirebaseDatabase.getInstance().getReference("Posteds/Estates/"+Ki);//.push();
+
+        mDatabaseRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                desc.setText((String) dataSnapshot.child("eDesc").getValue());
+                price.setText((String) dataSnapshot.child("ePrice").getValue());
+                area.setText((String) dataSnapshot.child("eArea").getValue());
+
+                County.setSelection(getIndex(County, (String) dataSnapshot.child("eCounty").getValue()));
+                SubCounty.setSelection(getIndex(County, (String) dataSnapshot.child("eCountySub").getValue()));
+
+                try {
+                    Picasso.get().load((String) dataSnapshot.child("eImg0").getValue()).into(imgsel);
+
+                }catch (Exception ex){
+                    Picasso.get().load(R.drawable.ic_defuser).into(imgsel);
+                    Toast.makeText(Estate_Modify.this, "Picasso.get() Error"+ex, Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        pds22.dismiss();
+    }
+
+    private int getIndex(Spinner spinner, String myString){
+        for (int i=0;i<spinner.getCount();i++){
+            if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(myString)){
+                return i;
+            }
+        }
+        return 0;
     }
 
 
     private void SendComit() {
-        pds22.setMessage("Uploading Info");
-        Toast.makeText(this, "Selected County :"+County.getSelectedItem().toString()+
-                "\n Selected SubCounty :"+SubCounty.getSelectedItem().toString()+
-                "\n Description :"+desc.getText().toString()+
-                "\n Price :"+price.getText().toString(),Toast.LENGTH_LONG);
+        pds22.setMessage("Updating Info");
         pds22.show();
 
         Calendar cal= Calendar.getInstance();
@@ -1063,7 +1098,7 @@ public class Estate_Edit extends AppCompatActivity implements AdapterView.OnItem
 
                 pds22.dismiss();
                 finish();
-                Intent carimg=new Intent(Estate_Edit.this, Casa.class);
+                Intent carimg=new Intent(Estate_Modify.this, Casa.class);
                 carimg.putExtra("PostUUIDCode","PostsE");
                 startActivity(carimg);
             }
@@ -1071,7 +1106,7 @@ public class Estate_Edit extends AppCompatActivity implements AdapterView.OnItem
             @Override
             public void onFailure(@NonNull Exception e) {
                 pds22.dismiss();
-                Toast.makeText(Estate_Edit.this, "Add car addOnFailureListener\n"+e.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(Estate_Modify.this, "Add car addOnFailureListener\n"+e.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -1111,7 +1146,7 @@ public class Estate_Edit extends AppCompatActivity implements AdapterView.OnItem
                                         @Override
                                         public void onFailure(@NonNull Exception e) {
                                             pds22.dismiss();
-                                            Toast.makeText(Estate_Edit.this, "Add Image URL addOnFailureListener\n"+e.getMessage(), Toast.LENGTH_LONG).show();
+                                            Toast.makeText(Estate_Modify.this, "Add Image URL addOnFailureListener\n"+e.getMessage(), Toast.LENGTH_LONG).show();
                                         }
                                     });
 
@@ -1119,7 +1154,7 @@ public class Estate_Edit extends AppCompatActivity implements AdapterView.OnItem
                                     Picasso.get().load(R.drawable.ic_addcimg).placeholder(R.drawable.ic_addcimg).into(imgsel);
                                     pds22.dismiss();
 
-                                    Toast.makeText(Estate_Edit.this, "Upload Succesfull", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(Estate_Modify.this, "Upload Succesfull", Toast.LENGTH_SHORT).show();
 
                                 }
                             });
@@ -1129,7 +1164,7 @@ public class Estate_Edit extends AppCompatActivity implements AdapterView.OnItem
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             pds22.dismiss();
-                            Toast.makeText(Estate_Edit.this, "Upload task addOnFailureListener\n"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Estate_Modify.this, "Upload task addOnFailureListener\n"+e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     })
                     .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
