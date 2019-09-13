@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/fram">
+
+                <VideoView
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:id="@+id/viuvid"/>
+
+            </FrameLayout>
+
+            <Button
+                android:id="@+id/buttonSEL"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/fram"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:background="#744"
+                android:text="Select"
+                android:textAllCaps="false"
+                android:textColor="#cdd8f1" />
+
+            <Button
+                android:id="@+id/buttonUo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/buttonSEL"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:background="#744"
+                android:text="Upload"
+                android:textAllCaps="false"
+                android:textColor="#cdd8f1" />
+
+            <TextView
+                android:id="@+id/links"
+                android:layout_below="@+id/buttonUo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="25dp"
+                android:text="Link"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
+                android:textColor="@color/colorPrimary" />
+
+            <TextView
+                android:id="@+id/metas"
+                android:layout_below="@+id/links"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="25dp"
+                android:text="Metas"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
+                android:textColor="@color/colorPrimary" />
+
+            <TextView
+                android:id="@+id/deta"
+                android:layout_below="@+id/metas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="25dp"
+                android:text="Detemine"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
+                android:textColor="@color/colorPrimary" />
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

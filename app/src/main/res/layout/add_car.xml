@@ -613,18 +613,6 @@
                     android:orientation="horizontal"
                     android:gravity="center_horizontal">
 
-                    <VideoView
-                        android:id="@+id/com_vid"
-                        android:layout_width="200dp"
-                        android:layout_height="200dp"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginRight="20dp"
-                        android:layout_marginTop="20dp"
-                        android:background="#b2b1b3"
-                        android:clickable="true"
-                        android:elevation="5dp"
-                        android:scaleType="centerCrop"/>
-
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

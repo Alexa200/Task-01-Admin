@@ -129,7 +129,7 @@ public class Add_Car extends AppCompatActivity {
         vmodel=findViewById(R.id.cmodel);
 
         imgsel = findViewById(R.id.com_imagesel);
-        vidsel = findViewById(R.id.com_vid);
+        //vidsel = findViewById(R.id.com_vid);
 
         btnvid = findViewById(R.id.sedvid);
         btnupload = findViewById(R.id.upload);
@@ -160,14 +160,12 @@ public class Add_Car extends AppCompatActivity {
             }
         });
 
-        vidsel.setOnClickListener(new View.OnClickListener() {
+        btnvid.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*Intent intent = new Intent();
-                intent.setType("video/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent,"Select Video"),reqcod);*/
-                Toast.makeText(Add_Car.this, "Nigga", Toast.LENGTH_SHORT).show();
+                Intent cv = new Intent(Add_Car.this,Add_CarVideo.class);
+                cv.putExtra("ChildNode",uploadId);
+                startActivity(cv);
             }
         });
 

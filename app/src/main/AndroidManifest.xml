@@ -47,6 +47,7 @@
         <activity android:name=".Act_myProfile" />
         <activity android:name=".Add_Car"
             android:windowSoftInputMode="stateAlwaysHidden"/>
+        <activity android:name=".Add_CarVideo"/>
         <activity android:name=".Add_Estate" />
         <activity android:name=".PostCarD" />
         <activity android:name=".PostEstateD" />
