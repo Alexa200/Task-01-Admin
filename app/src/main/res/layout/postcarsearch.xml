@@ -5,12 +5,12 @@
     android:layout_height="match_parent"
     android:background="#e4e2e1">
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/postrecycla"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#c6c7c2">
 
-    </android.support.v7.widget.RecyclerView>
+    </androidx.recyclerview.widget.RecyclerView>
 
 </RelativeLayout>

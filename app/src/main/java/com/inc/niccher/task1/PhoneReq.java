@@ -1,7 +1,7 @@
 package com.inc.niccher.task1;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class PhoneReq extends AppCompatActivity {
 

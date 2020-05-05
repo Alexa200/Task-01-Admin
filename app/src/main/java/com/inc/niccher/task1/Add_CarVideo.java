@@ -8,9 +8,10 @@ import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
@@ -67,6 +68,10 @@ public class Add_CarVideo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_carvideo);
 
+        getSupportActionBar().setTitle("Upload a Video");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         sel=findViewById(R.id.buttonSEL);
         sendvid=findViewById(R.id.buttonUo);
 
@@ -105,17 +110,32 @@ public class Add_CarVideo extends AppCompatActivity {
 
     private void Setta(){
         uploadId=ids.getStringExtra("ChildNode");
+
+        Log.e("Keys : ", "Id Video->"+uploadId);
+        Log.e("Keys : ", "Id Video1->"+ids.getStringExtra("ChildNode"));
+
         try {
-            if (uploadId.length() < 1){
+            if (ids.getStringExtra("ChildNode")==null){
                 finish();
                 startActivity(new Intent(Add_CarVideo.this, Add_Car.class));
-                //Toast.makeText(this, "No key Passed", Toast.LENGTH_LONG).show();
             }else {
-                //Toast.makeText(this, "Setta Cars Caught -> "+uploadId, Toast.LENGTH_LONG).show();
+                uploadId=ids.getStringExtra("ChildNode");
             }
         }catch (Exception ex){
             //Toast.makeText(this, "Setta Error -> "+ex, Toast.LENGTH_LONG).show();
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        uploadId=ids.getStringExtra("ChildNode");
+        int idd=item.getItemId();
+        if (idd==android.R.id.home){
+            Intent adcar=new Intent(Add_CarVideo.this,Add_Car.class);
+            adcar.putExtra("keyid",uploadId);
+            startActivity(adcar);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void Picka(){

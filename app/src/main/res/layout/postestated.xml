@@ -26,7 +26,7 @@
                     android:orientation="vertical"
                     android:id="@+id/sop">
 
-                    <android.support.v4.view.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
+                    <androidx.viewpager.widget.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
                         xmlns:app="http://schemas.android.com/apk/res-auto"
                         xmlns:tools="http://schemas.android.com/tools"
                         android:id="@+id/est_img_pager"
@@ -34,7 +34,7 @@
                         android:layout_height="200dp"
                         android:background="#d4d4d1">
 
-                    </android.support.v4.view.ViewPager>
+                    </androidx.viewpager.widget.ViewPager>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -209,7 +209,7 @@
 
                 </LinearLayout>
 
-                <android.support.design.widget.FloatingActionButton
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/postedit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

@@ -1,22 +1,16 @@
 package com.inc.niccher.task1;
 
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.INotificationSideChannel;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -36,7 +30,6 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
-import com.google.gson.internal.Primitives;
 import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
@@ -202,24 +195,29 @@ public class Add_Car extends AppCompatActivity {
     }
 
     private void Setta(){
-        uploadId=proc.getStringExtra("Kiy");
         try {
-            if (uploadId.length() < 1){
-                finish();
-                startActivity(new Intent(Add_Car.this, Casa.class));
-                //Toast.makeText(this, "No key Passed", Toast.LENGTH_LONG).show();
+            if (proc.getStringExtra("Kiy")==null){
+                if (proc.getStringExtra("keyid")==null){
+                    finish();
+                    startActivity(new Intent(Add_Car.this, Casa.class));
+                }else if (!(proc.getStringExtra("keyid") ==null)){
+                    uploadId=proc.getStringExtra("keyid");
+                }
             }else {
-                //Toast.makeText(this, "Setta Cars Caught -> "+uploadId, Toast.LENGTH_LONG).show();
+                if (!(proc.getStringExtra("Kiy") ==null)){
+                    uploadId=proc.getStringExtra("Kiy");
+                }
             }
         }catch (Exception ex){
-            //Toast.makeText(this, "Setta Error -> "+ex, Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Setta Error -> "+ex, Toast.LENGTH_LONG).show();
         }
+
+        Log.e("Keys : ", "Id Old->"+proc.getStringExtra("Kiy"));
+        Log.e("Keys : ", "Id New->"+proc.getStringExtra("keyid"));
+        Log.e("Keys : ", "uploadId->"+uploadId);
     }
 
     private void SendComit() {
-        pds22.setMessage("Uploading Info");
-        pds22.show();
-
         Calendar cal= Calendar.getInstance();
         SimpleDateFormat ctime=new SimpleDateFormat("HH:mm");
         SimpleDateFormat cdate=new SimpleDateFormat("dd-MMMM-yyyy");
@@ -250,23 +248,36 @@ public class Add_Car extends AppCompatActivity {
         hasm2.put("cOwner",userf.getUid());
         hasm2.put("cTime","On "+cdat+" At "+ctim);
 
-        mDatabaseRef.child(uploadId).updateChildren(hasm2).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
+        try {
+            if (uploadId==null){
+                Toast.makeText(Add_Car.this, "Null Uploadid->"+uploadId, Toast.LENGTH_SHORT).show();
 
-                pds22.dismiss();
-                finish();
-                Intent carimg=new Intent(Add_Car.this, Casa.class);
-                carimg.putExtra("PostUUIDCode","Posts");
-                startActivity(carimg);
+            }else {
+                pds22.setMessage("Uploading Info");
+                pds22.show();
+                /*Toast.makeText(Add_Car.this, "Uploadid Value is ->"+uploadId, Toast.LENGTH_SHORT).show();
+                mDatabaseRef.child(uploadId).updateChildren(hasm2).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+
+                        pds22.dismiss();
+                        finish();
+                        Intent carimg=new Intent(Add_Car.this, Casa.class);
+                        carimg.putExtra("PostUUIDCode","Posts");
+                        startActivity(carimg);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        pds22.dismiss();
+                        Toast.makeText(Add_Car.this, "Add car addOnFailureListener\n"+e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });*/
             }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                pds22.dismiss();
-                Toast.makeText(Add_Car.this, "Add car addOnFailureListener\n"+e.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
+        }catch (Exception ex){
+            Toast.makeText(Add_Car.this, "Uploadid error is ->"+ex, Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     private void uploadFile() {

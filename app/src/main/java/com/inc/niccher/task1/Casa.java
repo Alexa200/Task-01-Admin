@@ -2,19 +2,17 @@ package com.inc.niccher.task1;
 
 import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.NonNull;
+import com.google.android.material.navigation.NavigationView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,8 +28,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 public class Casa extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -99,14 +95,14 @@ public class Casa extends AppCompatActivity implements NavigationView.OnNavigati
             //Log.e("getStringExtra", "GetTarget: "+had );
             if (had.equals("Posts--")){
                 Fragment frags=null;
-                getSupportActionBar().setTitle("Posts");
+                getSupportActionBar().setTitle("Posted Vehicles");
                 frags=new Frag_PostV();
                 FragmentManager frman0=getSupportFragmentManager();
                 frman0.beginTransaction().replace(R.id.maincontaina,frags).commit();
 
             }else if (had.equals("PostsE--")){
                 Fragment frags=null;
-                getSupportActionBar().setTitle("Posts");
+                getSupportActionBar().setTitle("Posted Estates");
                 frags=new Frag_PostE();
                 FragmentManager frman0=getSupportFragmentManager();
                 frman0.beginTransaction().replace(R.id.maincontaina,frags).commit();
@@ -211,7 +207,7 @@ public class Casa extends AppCompatActivity implements NavigationView.OnNavigati
                 break;
             }case R.id.nav_postv:{
                 frags=new Frag_PostV();
-                getSupportActionBar().setTitle("Posted Estates");
+                getSupportActionBar().setTitle("Posted Vehicles");
                 FragmentManager frman2=getSupportFragmentManager();
                 frman2.beginTransaction().replace(R.id.maincontaina,frags).commit();
                 break;
